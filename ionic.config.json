@@ -1,0 +1,7 @@
+{
+  "name": "dewi_fe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
