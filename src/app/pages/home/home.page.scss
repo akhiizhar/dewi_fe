@@ -1,0 +1,90 @@
+/* Pastel blue color scheme */
+.pastel-blue-header {
+  --background: #a6cced;
+  --color: #ffffff;
+}
+
+.pastel-blue-background {
+  --background: #e6f2ff;
+}
+
+.welcome-container {
+  text-align: center;
+  padding: 20px;
+
+  h3 {
+    color: #5499c7;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+}
+
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Logo styling */
+.app-logo {
+  max-width: 100%;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+/* Center image column */
+.logo-column,
+.welcome-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.welcome-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #5499c7;
+  justify-content: center;
+  font-style: italic;
+}
+/* Button container spacing (if used separately) */
+.button-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Register button - darker pastel blue */
+.register-button {
+  --background: #7fb3d5;
+  --background-hover: #5499c7;
+  --color: white;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  font-weight: 600;
+  height: 50px;
+  font-size: 16px;
+  --box-shadow: 0 4px 10px rgba(127, 179, 213, 0.3);
+}
+
+/* Login button - lighter pastel blue */
+.login-button {
+  --background: #aed6f1;
+  --background-hover: #85c1e9;
+  --color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  height: 50px;
+  font-size: 16px;
+  --box-shadow: 0 4px 10px rgba(174, 214, 241, 0.3);
+}
+
+.icon-button {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+}
