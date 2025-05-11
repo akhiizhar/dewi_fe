@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
 
     // Tunggu sampai user menekan OK, baru redirect
     await alert.onDidDismiss();
-    window.location.href = '/home-page';
+    window.location.href = '/tabs';
   }
 
   togglePasswordVisibility(): void {

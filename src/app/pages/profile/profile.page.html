@@ -1,17 +1,67 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="container">
+    <div class="user-info">
+      <div class="avatar-container">
+        <div class="avatar">
+          <ion-icon name="person"></ion-icon>
+        </div>
+      </div>
+      <div class="user-details">
+        <h2>USER</h2>
+        <p>lmshuvo97</p>
+      </div>
+      <ion-button fill="clear" color="primary">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-list lines="full">
+      <ion-item detail>
+        <ion-icon name="bag" slot="start"></ion-icon>
+        <ion-label>Orders</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>My Details</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="location" slot="start"></ion-icon>
+        <ion-label>Delivery Address</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="card" slot="start"></ion-icon>
+        <ion-label>Payment Methods</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="pricetag" slot="start"></ion-icon>
+        <ion-label>Promo Cord</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="notifications" slot="start"></ion-icon>
+        <ion-label>Notifecations</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="help-circle" slot="start"></ion-icon>
+        <ion-label>Help</ion-label>
+      </ion-item>
+
+      <ion-item detail>
+        <ion-icon name="information-circle" slot="start"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="logout-container">
+      <ion-button expand="block" color="light" class="logout-button">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+        Log Out
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
-
-<ion-footer>
-  <app-tab-footer></app-tab-footer>
-</ion-footer>

@@ -12,7 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     SearchPageRoutingModule,
-    SharedModule,
+    // SharedModule,
   ],
   declarations: [SearchPage],
 })

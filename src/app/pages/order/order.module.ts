@@ -12,7 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     OrderPageRoutingModule,
-    SharedModule,
+    // SharedModule,
   ],
   declarations: [OrderPage],
   exports: [OrderPage],

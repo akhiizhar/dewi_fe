@@ -12,7 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     HistoryPageRoutingModule,
-    SharedModule,
+    // SharedModule,
   ],
   declarations: [HistoryPage],
 })
