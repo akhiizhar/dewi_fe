@@ -1,0 +1,63 @@
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button
+          tab="home"
+          [ngClass]="{ 'active-tab': activeTab === 'home' }"
+          routerLink="/home-page"
+          routerLinkActive="activeTab"
+          (click)="setActiveTab('home')"
+        >
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button
+          tab="order"
+          [ngClass]="{ 'active-tab': activeTab === 'order' }"
+          routerLink="/order"
+          routerLinkActive="activeTab"
+          (click)="setActiveTab('order')"
+        >
+          <ion-icon name="cart"></ion-icon>
+          <ion-label>Order</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button
+          tab="search"
+          [ngClass]="{ 'active-tab': activeTab === 'search' }"
+          routerLink="/search"
+          routerLinkActive="activeTab"
+          (click)="setActiveTab('search')"
+        >
+          <ion-icon name="search"></ion-icon>
+          <ion-label>Search</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button
+          tab="history"
+          [ngClass]="{ 'active-tab': activeTab === 'history' }"
+          routerLink="/history"
+          routerLinkActive="activeTab"
+          (click)="setActiveTab('history')"
+        >
+          <ion-icon name="clipboard"></ion-icon>
+          <ion-label>History</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button
+          tab="profile"
+          [ngClass]="{ 'active-tab': activeTab === 'profile' }"
+          routerLink="/profile"
+          routerLinkActive="activeTab"
+          (click)="setActiveTab('profile')"
+        >
+          <ion-icon name="person"></ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { HomePagePageRoutingModule } from './home-page-routing.module';
-import { HomePagePage } from './home-page.page';
+import { HistoryPageRoutingModule } from './history-routing.module';
+import { HistoryPage } from './history.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -11,9 +11,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePagePageRoutingModule,
+    HistoryPageRoutingModule,
     SharedModule,
   ],
-  declarations: [HomePagePage],
+  declarations: [HistoryPage],
 })
-export class HomePagePageModule {}
+export class HistoryPageModule {}
