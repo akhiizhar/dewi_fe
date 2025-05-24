@@ -74,7 +74,7 @@ export class LoginPage implements OnInit {
         console.log('Stored user data:', storedUser);
 
         // Ambil nama atau data lain dari storedUser
-        const name = storedUser.name; // Misalnya mengambil nama dari objek yang disimpan
+        const name = storedUser.user.name; // Misalnya mengambil nama dari objek yang disimpan
         await this.presentSuccessAlert(name); // Tampilkan nama melalui alert
       },
       error: (error) => {

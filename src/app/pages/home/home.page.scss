@@ -28,25 +28,43 @@
 }
 
 /* Logo styling */
-.app-logo {
+.app-icon {
   max-width: 100%;
   margin: 0 auto 20px;
   display: block;
 }
+.app-logo {
+  width: 60px;
+  height: auto;
+  margin-bottom: 16px;
+}
 
 /* Center image column */
-.logo-column,
-.welcome-column {
+.logo-column {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 100%; /* Adjust the size of the logo */
+  height: auto;
 }
+
+.welcome-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* untuk rata tengah horizontal */
+  justify-content: center; /* untuk rata tengah vertikal */
+  width: 100%; /* biarkan kolom menggunakan seluruh lebar */
+  text-align: center; /* agar teks di <h3> rata tengah */
+  padding: 16px; /* opsional: memberi ruang */
+}
+
 .welcome-message {
   text-align: center;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
   color: #5499c7;
+  // color: #3f51b5;
   justify-content: center;
   font-style: italic;
 }

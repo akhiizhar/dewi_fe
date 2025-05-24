@@ -13,7 +13,7 @@
 </ion-content> -->
 
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
     <ion-tab-button
       tab="home-page"
       [ngClass]="{ 'active-tab': activeTab === 'home-page' }"
@@ -33,7 +33,7 @@
       (click)="setActiveTab('order')"
     >
       <ion-icon name="cart"></ion-icon>
-      <ion-label>Order</ion-label>
+      <ion-label>Orderrrrr</ion-label>
     </ion-tab-button>
 
     <ion-tab-button
@@ -69,5 +69,4 @@
       <ion-label>Profile</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
-  <ion-router-outlet></ion-router-outlet>
 </ion-tabs>

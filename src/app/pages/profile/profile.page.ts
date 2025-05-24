@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class ProfilePage implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  logout() {
+    console.log('User logged out');
+    localStorage.clear();
+    this.router.navigate(['/login']); // Redirect to the login page
+  }
 }
