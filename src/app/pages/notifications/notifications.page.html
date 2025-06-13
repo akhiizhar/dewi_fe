@@ -1,0 +1,31 @@
+<ion-content>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div class="header-title" (click)="goBack()">
+          <ion-icon size="large" name="arrow-back-outline"></ion-icon>
+          <p>Notifications</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notifications-list">
+      <div class="notification-item" *ngFor="let notification of notifications">
+        <div class="notification-header">
+          <h3>{{ notification.title }}</h3>
+          <span class="notification-date">
+            {{ notification.date | date: 'medium' }}
+          </span>
+        </div>
+
+        <p class="notification-description">{{ notification.description }}</p>
+
+        <!-- Message di pojok kiri bawah -->
+        <span class="approval-label" *ngIf="notification.message">
+          {{ notification.message }}
+        </span>
+      </div>
+    </div>
+  </div>
+</ion-content>

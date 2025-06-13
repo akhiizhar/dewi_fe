@@ -1,0 +1,78 @@
+.dashboard-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  min-height: 100%;
+}
+
+.header {
+  background-color: #3f51b5;
+  color: white;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px;
+}
+.header p {
+  font-size: 18px;
+  font-weight: bold;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  flex-direction: row; /* Ensures the icon and text are side by side */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.notification-item {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.notification-date {
+  font-size: 14px;
+  color: gray;
+}
+
+.notification-description {
+  margin: 12px 0;
+  font-size: 15px;
+  color: #333;
+}
+
+.approval-label {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-size: 13px;
+  font-weight: bold;
+  color: orange;
+}

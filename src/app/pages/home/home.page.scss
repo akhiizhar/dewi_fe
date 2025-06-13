@@ -1,108 +1,129 @@
-/* Pastel blue color scheme */
-.pastel-blue-header {
-  --background: #a6cced;
-  --color: #ffffff;
+.procurement-content {
+  --background: #f9fafb;
 }
 
-.pastel-blue-background {
-  --background: #e6f2ff;
-}
-
-.welcome-container {
-  text-align: center;
-  padding: 20px;
-
-  h3 {
-    color: #5499c7;
-    font-size: 23px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-}
-
-.centered-content {
+.procurement-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 0 1.5rem;
+}
+
+.header-section {
+  display: flex;
   justify-content: center;
-  height: 100%;
+  padding: 2rem 0 1rem 0;
 }
 
-/* Logo styling */
-.app-icon {
-  max-width: 100%;
-  margin: 0 auto 20px;
-  display: block;
-}
-.app-logo {
-  width: 60px;
-  height: auto;
-  margin-bottom: 16px;
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-/* Center image column */
-.logo-column {
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus-icon {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.main-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 100%; /* Adjust the size of the logo */
-  height: auto;
-}
-
-.welcome-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* untuk rata tengah horizontal */
-  justify-content: center; /* untuk rata tengah vertikal */
-  width: 100%; /* biarkan kolom menggunakan seluruh lebar */
-  text-align: center; /* agar teks di <h3> rata tengah */
-  padding: 16px; /* opsional: memberi ruang */
-}
-
-.welcome-message {
+  max-width: 64rem;
+  margin: 0 auto;
   text-align: center;
-  margin-top: 20px;
-  font-size: 18px;
-  color: #5499c7;
-  // color: #3f51b5;
-  justify-content: center;
-  font-style: italic;
+  padding: 2rem 0;
 }
-/* Button container spacing (if used separately) */
-.button-container {
-  padding: 20px;
+
+.hero-section {
+  margin-bottom: 4rem;
+}
+
+.hero-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 3.75rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  line-height: 1.6;
+  max-width: 32rem;
+  margin: 0 auto 0.5rem auto;
+  // margin-bottom: 0.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+}
+
+.illustration-container {
+  position: relative;
+  margin-bottom: 4rem;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: center;
 }
 
-/* Register button - darker pastel blue */
-.register-button {
-  --background: #7fb3d5;
-  --background-hover: #5499c7;
-  --color: white;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  font-weight: 600;
-  height: 50px;
-  font-size: 16px;
-  --box-shadow: 0 4px 10px rgba(127, 179, 213, 0.3);
+.cta-section {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
-/* Login button - lighter pastel blue */
-.login-button {
-  --background: #aed6f1;
-  --background-hover: #85c1e9;
-  --color: white;
-  border-radius: 10px;
-  font-weight: 600;
-  height: 50px;
-  font-size: 16px;
-  --box-shadow: 0 4px 10px rgba(174, 214, 241, 0.3);
+.cta-button {
+  --background: #3f51b5;
+  --background-hover: #3f51b5;
+  --background-focused: #3f51b5;
+  // --color: white;
+  --border-radius: 50%; /* Membuat tombol menjadi bulat */
+  width: 3rem;
+  height: 3rem;
 }
 
-.icon-button {
-  position: fixed;
-  bottom: 50px;
-  right: 30px;
+// Responsive adjustments
+@media (max-width: 768px) {
+  .travel-container {
+    padding: 0 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 1rem 0;
+  }
 }

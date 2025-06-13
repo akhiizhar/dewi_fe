@@ -21,10 +21,10 @@ const routes: Routes = [
           import('../pages/order/order.module').then((m) => m.OrderPageModule),
       },
       {
-        path: 'search',
+        path: 'approval',
         loadChildren: () =>
-          import('../pages/search/search.module').then(
-            (m) => m.SearchPageModule
+          import('../pages/approval/approval.module').then(
+            (m) => m.ApprovalPageModule
           ),
       },
       {

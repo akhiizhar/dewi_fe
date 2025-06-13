@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class HomePagePage implements OnInit {
   name: string = '';
   todayDate: string = '';
-  constructor() {}
+  notificationCount = 0;
+  constructor(
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     const user = localStorage.getItem('user');
@@ -27,10 +33,20 @@ export class HomePagePage implements OnInit {
       day: 'numeric',
     };
     this.todayDate = today.toLocaleDateString('id-ID', options);
+
+    // Simulasi jumlah notifikasi
+    // Load dari localStorage dulu
+    this.notificationCount = this.notificationService.getNotificationCount();
+
+    // Lalu fetch dari API & update count
+    this.notificationService.fetchNotifications().subscribe(() => {
+      this.notificationCount = this.notificationService.getNotificationCount();
+    });
   }
 
   openFilter() {
-    console.log('Filter opened');
-    // Implement filter logic here
+    console.log('Navigating to notifications...');
+    console.log('Navigating to notifications...');
+    this.router.navigate(['/notifications']);
   }
 }

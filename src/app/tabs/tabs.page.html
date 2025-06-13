@@ -27,24 +27,26 @@
 
     <ion-tab-button
       tab="order"
+      *ngIf="userRole === 'user'"
       [ngClass]="{ 'active-tab': activeTab === 'order' }"
       routerLink="/order"
       routerLinkActive="activeTab"
       (click)="setActiveTab('order')"
     >
-      <ion-icon name="cart"></ion-icon>
-      <ion-label>Orderrrrr</ion-label>
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Create</ion-label>
     </ion-tab-button>
 
     <ion-tab-button
-      tab="search"
-      [ngClass]="{ 'active-tab': activeTab === 'search' }"
-      routerLink="/search"
+      tab="approval"
+      *ngIf="userRole === 'approver'"
+      [ngClass]="{ 'active-tab': activeTab === 'approval' }"
+      routerLink="/approval"
       routerLinkActive="activeTab"
-      (click)="setActiveTab('search')"
+      (click)="setActiveTab('approval')"
     >
-      <ion-icon name="search"></ion-icon>
-      <ion-label>Search</ion-label>
+      <ion-icon name="create"></ion-icon>
+      <ion-label>Approval</ion-label>
     </ion-tab-button>
 
     <ion-tab-button

@@ -7,15 +7,16 @@
           <h1>Hi, {{name}}</h1>
           <p>{{ todayDate }}</p>
         </div>
-        <button
+        <div
           class="filter-button"
           (click)="openFilter()"
-          fill="clear"
-          shape="round"
+          style="position: relative"
         >
-          <ion-icon name="options"></ion-icon>
-          <p>Filter</p>
-        </button>
+          <ion-icon name="notifications" size="large"></ion-icon>
+          <span class="notification-badge" *ngIf="notificationCount > 0">
+            {{ notificationCount }}
+          </span>
+        </div>
       </div>
     </div>
 

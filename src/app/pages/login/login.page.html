@@ -1,9 +1,23 @@
 <ion-content>
   <div class="login-container">
     <div class="login-box">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <img
+            src="assets/images/logo_dewi.png"
+            alt="App Logo"
+            class="plus-icon"
+          />
+        </div>
+        <span class="logo-text">DEWI System</span>
+      </div>
       <div class="login-header">
-        <h1>Welcome Back</h1>
-        <p>Login to access your account</p>
+        <h1>Welcome!</h1>
+        <p>
+          DEWI's system aims To simplify and accelerate the procurement process
+          for goods and services in a transparent, efficient, and seamless
+          integration.
+        </p>
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">

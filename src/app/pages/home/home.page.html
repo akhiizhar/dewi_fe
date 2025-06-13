@@ -1,40 +1,40 @@
-<ion-content class="pastel-blue-background">
-  <ion-grid class="welcome-container centered-content">
-    <ion-row>
-      <ion-col class="welcome-column">
-        <img
-          src="assets/images/logo_dewi.png"
-          alt="App Logo"
-          class="app-logo"
-        />
-        <!-- <h3>Digital E-Procurement With Integrity</h3> -->
-      </ion-col>
-    </ion-row>
+<ion-content [fullscreen]="true" class="procurement-content">
+  <div class="procurement-container">
+    <!-- Header -->
+    <div class="header-section">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <img src="assets/images/logo_dewi.png" alt="App Logo" />
+        </div>
+        <span class="logo-text">DEWI System</span>
+      </div>
+    </div>
 
-    <ion-row>
-      <ion-col>
-        <p class="welcome-message">
-          Selamat datang di Portal e-Procurement.<br />
-          “Pengadaan Digital, Penuh Integritas.”
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Hero Text -->
+      <div class="hero-section">
+        <h1 class="hero-title">
+          Digital E-Procurement,<br />
+          With Integrity.
+        </h1>
+
+        <p class="hero-subtitle">
+          Solusi terbaik untuk pengadaan yang transparan, efisien, dan
+          terpercaya.
         </p>
-      </ion-col>
-    </ion-row>
+      </div>
 
-    <ion-row>
-      <ion-col class="logo-column">
-        <img src="assets/images/home.png" alt="Home Logo" class="app-icon" />
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="14">
-        <ion-button fill="clear" class="icon-button" (click)="goToLogin()">
-          <ion-icon
-            name="arrow-forward-circle-outline"
-            style="font-size: 40px"
-          ></ion-icon>
+      <!-- Illustration -->
+      <div class="illustration-container">
+        <img src="assets/images/home.png" alt="Home Logo" class="home-logo" />
+      </div>
+      <!-- CTA Button -->
+      <div class="cta-section">
+        <ion-button class="cta-button" routerLink="/login">
+          <ion-icon size="large" name="arrow-forward"></ion-icon>
         </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      </div>
+    </div>
+  </div>
 </ion-content>
