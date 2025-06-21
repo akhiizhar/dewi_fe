@@ -6,11 +6,15 @@
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: #3f51b5;
   color: white;
   padding-left: 16px;
   padding-right: 16px;
   margin-bottom: 16px;
+  z-index: 1000;
 }
 .header p {
   font-size: 18px;
@@ -34,6 +38,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
+  padding-top: 72px; /* bisa juga di sini */
 }
 
 .notification-item {
@@ -71,7 +76,7 @@
 .approval-label {
   position: absolute;
   bottom: 12px;
-  left: 16px;
+  right: 16px;
   font-size: 13px;
   font-weight: bold;
   color: orange;

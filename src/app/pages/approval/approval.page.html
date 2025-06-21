@@ -1,17 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>search</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div>
+          <p>Approval</p>
+        </div>
+      </div>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">search</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="notifications-list">
+      <div
+        class="notification-item"
+        *ngFor="let approval of approvals"
+        (click)="goToDetail(approval)"
+      >
+        <div class="notification-header">
+          <h3>{{ approval.title }}</h3>
+          <span class="notification-date">
+            {{ approval.due_date | date: 'dd-MMM-yyyy' }}
+          </span>
+        </div>
+
+        <p class="notification-description">{{ approval.description }}</p>
+        <p>{{ approval.user?.name }}</p>
+
+        <!-- Message di pojok kiri bawah -->
+        <span class="approval-label" *ngIf="approval.message">
+          {{ approval.message }}
+        </span>
+      </div>
+    </div>
+  </div>
 </ion-content>
-
-<!-- <ion-footer>
-  <app-tab-footer></app-tab-footer>
-</ion-footer> -->

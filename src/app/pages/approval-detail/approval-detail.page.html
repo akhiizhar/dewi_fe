@@ -1,0 +1,113 @@
+<ion-content>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div class="header-title" (click)="goBack()">
+          <ion-icon size="large" name="arrow-back-outline"></ion-icon>
+          <p>Detail Approvalaaaaa</p>
+        </div>
+      </div>
+    </div>
+    <div class="detail-container">
+      <h2>Detail Approval</h2>
+
+      <!-- No Registrasi & Tanggal -->
+      <ion-item>
+        <ion-label>No Reg</ion-label>
+        <ion-text>{{ approval?.no_reg }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tanggal Due</ion-label>
+        <ion-text>{{ approval?.due_date | date: 'dd MMM yyyy' }}</ion-text>
+      </ion-item>
+
+      <!-- User Info -->
+      <ion-item>
+        <ion-label>Nama User</ion-label>
+        <ion-text>{{ approval?.user?.name }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-text>{{ approval?.user?.email }}</ion-text>
+      </ion-item>
+
+      <!-- Detail Pengajuan -->
+      <ion-item>
+        <ion-label>Judul</ion-label>
+        <ion-text>{{ approval?.title }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Deskripsi</ion-label>
+        <ion-text>{{ approval?.description }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Total Amount</ion-label>
+        <ion-text>Rp {{ approval?.total_amount }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-text>{{ approval?.status }}</ion-text>
+      </ion-item>
+
+      <!-- Message -->
+      <ion-item *ngIf="approval?.message">
+        <ion-label>Pesan</ion-label>
+        <ion-text>{{ approval?.message }}</ion-text>
+      </ion-item>
+
+      <!-- Items Table -->
+      <div class="items-table">
+        <h3>Daftar Item</h3>
+        <ion-grid>
+          <ion-row>
+            <ion-col><strong>Nama</strong></ion-col>
+            <ion-col><strong>Spesifikasi</strong></ion-col>
+            <ion-col><strong>Qty</strong></ion-col>
+            <ion-col><strong>Unit</strong></ion-col>
+            <ion-col><strong>Harga</strong></ion-col>
+            <ion-col><strong>Subtotal</strong></ion-col>
+          </ion-row>
+          <ion-row *ngFor="let item of approval?.items">
+            <ion-col>{{ item.item_name }}</ion-col>
+            <ion-col>{{ item.specification }}</ion-col>
+            <ion-col>{{ item.quantity }}</ion-col>
+            <ion-col>{{ item.unit }}</ion-col>
+            <ion-col>Rp {{ item.unit_price }}</ion-col>
+            <ion-col>Rp {{ item.subtotal }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <!-- Catatan -->
+      <ion-item>
+        <ion-label position="stacked">Catatan</ion-label>
+        <ion-textarea
+          [(ngModel)]="note"
+          placeholder="Tambahkan catatan di sini..."
+        ></ion-textarea>
+      </ion-item>
+
+      <!-- Tombol Approve & Reject -->
+      <div class="action-buttons">
+        <ion-button
+          expand="block"
+          color="success"
+          (click)="submitApproval('approved_manager')"
+          >Approve</ion-button
+        >
+        <ion-button
+          expand="block"
+          color="danger"
+          (click)="submitApproval('rejected_manager')"
+          >Reject</ion-button
+        >
+      </div>
+    </div>
+  </div>
+</ion-content>

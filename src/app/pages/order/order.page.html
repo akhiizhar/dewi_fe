@@ -11,17 +11,20 @@
 
     <form [formGroup]="orderForm" (ngSubmit)="submitForm()">
       <!-- Form Details -->
+      <h2 class="section-title">Form Details</h2>
       <div class="card">
-        <h2>Form Details</h2>
-
         <div class="form-group">
           <label>Title</label>
           <input type="text" formControlName="title" />
+          <small class="helper-text">Contoh: Pengadaan Barang IT</small>
         </div>
 
         <div class="form-group">
           <label>Description</label>
           <textarea formControlName="description" rows="3"></textarea>
+          <small class="helper-text"
+            >Deskripsi singkat tentang permintaan</small
+          >
         </div>
 
         <div class="form-group" (click)="showDatePicker = true">
@@ -31,6 +34,9 @@
             readonly
             [value]="orderForm.get('due_date')?.value | date: 'yyyy-MM-dd'"
           />
+          <small class="helper-text"
+            >Tanggal batas permintaan harus dipenuhi</small
+          >
         </div>
 
         <ion-datetime
@@ -39,13 +45,13 @@
           presentation="date"
           (ionChange)="updateDueDate($event)"
           class="smooth-picker"
+          [min]="minDate()"
         ></ion-datetime>
       </div>
 
       <!-- Items -->
+      <h2 class="section-title">Items</h2>
       <div class="card">
-        <h2>Items</h2>
-
         <div formArrayName="items">
           <div
             *ngFor="let item of items.controls; let i = index"
@@ -57,26 +63,42 @@
             <div class="form-group">
               <label>Item Name</label>
               <input type="text" formControlName="item_name" />
+              <small class="helper-text">Contoh: Laptop Lenovo ThinkPad</small>
             </div>
 
             <div class="form-group">
               <label>Specification</label>
               <input type="text" formControlName="specification" />
+              <small class="helper-text">Contoh: RAM 16GB, SSD 512GB</small>
             </div>
 
             <div class="form-group">
               <label>Quantity</label>
               <input type="number" formControlName="quantity" />
+              <small class="helper-text">Jumlah unit yang dibutuhkan</small>
             </div>
 
             <div class="form-group">
               <label>Unit</label>
               <input type="text" formControlName="unit" />
+              <small class="helper-text">Contoh: pcs, box, pack</small>
             </div>
 
             <div class="form-group">
               <label>Unit Price</label>
               <input type="number" formControlName="unit_price" />
+              <small class="helper-text">Harga per unit dalam IDR</small>
+            </div>
+
+            <!-- Tambahan: Upload File -->
+            <div class="form-group">
+              <label>Upload File</label>
+              <input
+                type="file"
+                (change)="onFileChange($event, i)"
+                accept=".pdf,.jpg,.jpeg,.png"
+              />
+              <small class="helper-text">Maks. 5MB. Format: PDF/JPG/PNG</small>
             </div>
 
             <button type="button" (click)="removeItem(i)" class="danger-button">
@@ -93,11 +115,34 @@
       <!-- Submit Button -->
       <button
         type="submit"
-        [disabled]="orderForm.invalid"
+        [disabled]="orderForm.invalid || isSubmitting"
         class="submit-button"
+        *ngIf="!isSubmitting"
       >
         Submit
       </button>
     </form>
+    <!-- Loading Indicator -->
+    <ion-spinner
+      *ngIf="isSubmitting"
+      name="dots"
+      class="loading-indicator"
+    ></ion-spinner>
+
+    <!-- Modal Pop-up Custom -->
+    <!-- Modal Pop-up Custom -->
+    <div class="modal-backdrop" *ngIf="showModalPopup">
+      <div class="modal-content">
+        <ion-icon
+          size="large"
+          [name]="isSuccessModal ? 'checkmark-circle' : 'close-circle'"
+          [class.success-icon]="isSuccessModal"
+          [class.error-icon]="!isSuccessModal"
+        ></ion-icon>
+        <h2>{{ modalTitle }}</h2>
+        <p>{{ modalMessage }}</p>
+        <button class="close-button" (click)="closeModal()">OK</button>
+      </div>
+    </div>
   </div>
 </ion-content>

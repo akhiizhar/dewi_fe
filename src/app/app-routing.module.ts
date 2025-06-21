@@ -29,6 +29,10 @@ const routes: Routes = [
         (m) => m.NotificationsPageModule
       ),
   },
+  {
+    path: 'approval-detail',
+    loadChildren: () => import('./pages/approval-detail/approval-detail.module').then( m => m.ApprovalDetailPageModule)
+  },
 ];
 
 @NgModule({

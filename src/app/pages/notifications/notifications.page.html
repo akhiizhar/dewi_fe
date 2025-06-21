@@ -15,11 +15,12 @@
         <div class="notification-header">
           <h3>{{ notification.title }}</h3>
           <span class="notification-date">
-            {{ notification.date | date: 'medium' }}
+            {{ notification.due_date | date: 'dd-MMM-yyyy' }}
           </span>
         </div>
 
         <p class="notification-description">{{ notification.description }}</p>
+        <p>{{ notification.user.name }}</p>
 
         <!-- Message di pojok kiri bawah -->
         <span class="approval-label" *ngIf="notification.message">

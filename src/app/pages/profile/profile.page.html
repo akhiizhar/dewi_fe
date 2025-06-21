@@ -1,6 +1,5 @@
 <ion-content>
   <div class="container">
-    <!-- Avatar dan Nama -->
     <div class="profile-box">
       <div class="avatar-large">
         <ion-icon name="person" class="avatar-icon"></ion-icon>
@@ -11,29 +10,27 @@
       </div>
     </div>
 
-    <!-- Informasi User -->
     <div class="field-box" *ngIf="user">
       <ion-label>
         <h3>NIK</h3>
-        <p>{{ user.nik }}</p>
+        <p>{{ user.nik ? user.nik : '-' }}</p>
       </ion-label>
     </div>
 
     <div class="field-box">
       <ion-label>
         <h3>Phone</h3>
-        <p>{{ user.phone }}</p>
+        <p>{{ user.phone ? user.phone : '-' }}</p>
       </ion-label>
     </div>
 
     <div class="field-box">
       <ion-label>
         <h3>Department</h3>
-        <p>{{ user.department }}</p>
+        <p>{{ user.department ? user.department : '-' }}</p>
       </ion-label>
     </div>
 
-    <!-- Logout -->
     <div class="logout-container">
       <ion-button
         type="submit"

@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -16,34 +15,29 @@ import { AlertController } from '@ionic/angular';
   standalone: false,
 })
 export class LoginPage implements OnInit {
-  ngOnInit() {}
   showPassword = false;
   loginForm: FormGroup;
   loginErrorMessage: string | null = null;
   isLoading = false;
   apiUrl = environment.apiUrl;
+  showSuccessModal = false;
+  userName = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private http: HttpClient,
-    private alertController: AlertController
-  ) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
       rememberMe: [false],
     });
   }
-  async presentSuccessAlert(name: string) {
-    const alert = await this.alertController.create({
-      header: 'Login Berhasil',
-      message: `Selamat datang ${name}!`,
-      buttons: ['OK'],
-    });
-    await alert.present();
+  ngOnInit() {}
+  async presentSuccessModal(name: string) {
+    this.userName = name;
+    this.showSuccessModal = true;
+  }
 
-    // Tunggu sampai user menekan OK, baru redirect
-    await alert.onDidDismiss();
+  closeModal() {
+    this.showSuccessModal = false;
     window.location.href = '/tabs';
   }
 
@@ -57,25 +51,33 @@ export class LoginPage implements OnInit {
       return;
     }
     this.isLoading = true;
-
     const formData = this.loginForm.value;
-    console.log('Form submitted', formData);
-
+    // console.log('Form submitted', formData);
     this.http.post(`${this.apiUrl}/login`, formData).subscribe({
       next: async (response: any) => {
-        console.log('Login successful', response);
-        // Simpan token ke localStorage
         const data = response;
+        // localStorage.setItem('user', JSON.stringify(data));
+        // this.loginErrorMessage = null;
+        // this.isLoading = false;
+        // const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+        // console.log('Stored user data:', storedUser);
+        // const name = storedUser.user.name;
+        // await this.presentSuccessModal(name);
+        // Simpan token dan user secara terpisah
+        const token = response.access_token;
+        const tokenType = response.token_type || 'Bearer';
+        // const user = response.user;
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('token_type', tokenType);
         localStorage.setItem('user', JSON.stringify(data));
+
         this.loginErrorMessage = null;
         this.isLoading = false;
-        // Ambil data user dari localStorage
-        const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-        console.log('Stored user data:', storedUser);
 
-        // Ambil nama atau data lain dari storedUser
-        const name = storedUser.user.name; // Misalnya mengambil nama dari objek yang disimpan
-        await this.presentSuccessAlert(name); // Tampilkan nama melalui alert
+        const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+        const name = storedUser.user.name; // karena sudah simpan user langsung
+        await this.presentSuccessModal(name);
       },
       error: (error) => {
         console.error('Login failed', error);
