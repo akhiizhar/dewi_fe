@@ -5,21 +5,41 @@
   min-height: 100%;
 }
 
+// .header {
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+//   background-color: #3f51b5;
+//   color: white;
+//   padding-left: 16px;
+//   padding-right: 16px;
+//   margin-bottom: 16px;
+//   z-index: 1000;
+// }
 .header {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: #3f51b5;
   color: white;
+  padding-top: constant(safe-area-inset-top); // fallback lama
+  padding-top: env(safe-area-inset-top, 24px); // Safe area untuk status bar
+  padding-top: 20px; // fallback default utk Android
   padding-left: 16px;
   padding-right: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+
+  min-height: 64px; // Tinggi konsisten dengan header sebelumnya
+  display: flex;
+  align-items: center; // Vertikal tengah
+
   z-index: 1000;
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
 }
-.header p {
-  font-size: 18px;
-  font-weight: bold;
-}
+
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -38,7 +58,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  padding-top: 72px; /* bisa juga di sini */
+  padding-top: 88px; // Sesuaikan agar kontennya turun setelah header
 }
 
 .notification-item {

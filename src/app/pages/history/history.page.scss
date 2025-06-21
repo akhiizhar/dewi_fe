@@ -5,15 +5,34 @@
   min-height: 100%;
 }
 
+// .header {
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+//   background-color: #3f51b5;
+//   color: white;
+//   padding-left: 16px;
+//   padding-right: 16px;
+//   margin-bottom: 16px;
+//   z-index: 1000;
+
+//   p {
+//     font-weight: bold;
+//     font-size: 18px;
+//   }
+// }
 .header {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: #3f51b5;
   color: white;
+  padding-top: env(safe-area-inset-top); // untuk iOS modern
+  padding-top: constant(safe-area-inset-top); // fallback lama
+  padding-top: 20px; // fallback default utk Android
   padding-left: 16px;
   padding-right: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   z-index: 1000;
 
   p {
@@ -33,17 +52,17 @@
   justify-content: space-between;
   align-items: center;
 
-  h3,
-  p {
+  h3 {
     color: #333;
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 
 .card-container {
   padding: 12px;
-  margin-top: 64px;
+  margin-top: 80px;
 }
 
 .card {
@@ -66,16 +85,16 @@
 }
 
 .status-approved {
-  border-left-color: #4caf50 !important;
-  color: #4caf50;
+  border-left-color: #07a721 !important;
+  color: #07a721;
 }
 .status-in-tender {
-  border-left-color: #ff9800 !important;
-  color: #ff9800;
+  border-left-color: #e46f00 !important;
+  color: #e46f00;
 }
 .status-rejected {
-  border-left-color: #f44336 !important;
-  color: #f44336;
+  border-left-color: #ea3829 !important;
+  color: #ea3829;
 }
 
 .status-show-container {
@@ -84,6 +103,10 @@
   flex-direction: column;
   align-items: flex-end;
   margin-top: 10px;
+  span {
+    font-size: 16px;
+    font-weight: bold;
+  }
 }
 
 .status-label {
@@ -102,6 +125,7 @@
 }
 
 /* Modal */
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -118,16 +142,37 @@
 .modal-content {
   background: white;
   width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   padding: 20px;
   border-radius: 12px;
   position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.no-reg-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.no-reg {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0; // Hilangkan gap bawah
+}
+
+.created-at {
+  font-size: 13px;
+  color: gray;
+  margin: 0; // Hilangkan gap atas
+  margin-top: 2px; // Sedikit spasi rapat
 }
 
 .close-icon {
@@ -138,55 +183,56 @@
 
 .modal-body {
   margin-top: 16px;
-}
 
-.progress-status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 24px;
+  .info-section {
+    font-size: 16px;
+    margin-bottom: 10px;
 
-  .step {
+    p {
+      margin: 4px 0;
+      color: #333;
+    }
+  }
+
+  .icon-section {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     ion-icon {
-      font-size: 24px;
-      color: lightgray;
-      background: white;
-      z-index: 2;
+      font-size: 56px;
+      margin-bottom: 0;
     }
 
-    p {
-      font-size: 12px;
-      margin-top: 6px;
-      text-align: center;
-      color: #333;
+    .approve {
+      color: #07a721;
+      height: 100px;
+      width: 100px;
     }
-  }
 
-  .line {
-    height: 2px;
-    width: 30px;
-    background-color: lightgray;
-    margin: 0 4px;
-    z-index: 1;
-  }
+    .reject {
+      color: #ea3829;
+      height: 100px;
+      width: 100px;
+    }
 
-  .line-orange {
-    background-color: #ff9800 !important;
-  }
+    .status-info {
+      line-height: 1.2;
+      margin-top: 20px;
 
-  .line-green {
-    background-color: #4caf50 !important;
-  }
+      .status-text {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+      }
 
-  .active-orange {
-    color: #ff9800 !important;
-  }
-
-  .active-green {
-    color: #4caf50 !important;
+      .approval-date {
+        font-size: 14px;
+        color: gray;
+        margin-top: 2px;
+      }
+    }
   }
 }

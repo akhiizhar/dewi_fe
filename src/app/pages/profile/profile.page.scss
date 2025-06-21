@@ -1,7 +1,12 @@
 .container {
   padding: 20px;
+  padding-top: env(
+    safe-area-inset-top,
+    24px
+  ); // ini penting untuk iOS & Android modern
   max-width: 500px;
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 .profile-box {
@@ -12,6 +17,7 @@
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
+  margin-top: 12px;
   background-color: #fafafa;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
