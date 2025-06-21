@@ -17,12 +17,13 @@
             <p>{{ item.created_at | date: 'dd-MMM-yyyy' }}</p>
           </div>
 
-          <p>Total Amount: Rp {{ item.total_amount }}</p>
-          <p>Username: {{ item.user.username || 'N/A' }}</p>
+          <p>Total Amount: Rp {{ item.total_amount | number:'1.0-0' }},-</p>
+          <p>Username: {{ item.user.name || '-' }}</p>
 
           <div class="status-show-container">
             <span class="status-label" [ngClass]="getStatusClass(item.status)">
-              {{ item.status }}
+              {{ item.status === 'approved_manager' ? 'Approved' : item.status
+              === 'rejected_manager' ? 'Rejected' : item.status }}
             </span>
             <p class="show-detail" (click)="openDetail(item)">Show Detail</p>
           </div>
@@ -31,87 +32,45 @@
     </div>
 
     <!-- Modal -->
+    <!-- Modal -->
     <div class="modal" *ngIf="selectedItem">
       <div class="modal-content">
         <div class="modal-header">
-          <h2>{{ selectedItem.no_reg }}</h2>
+          <div class="no-reg-container">
+            <h2 class="no-reg">{{ selectedItem.no_reg }}</h2>
+            <p class="created-at">
+              Created at: {{ selectedItem.created_at | date: 'dd-MM-yyyy' }}
+            </p>
+          </div>
           <ion-icon
             name="close"
             class="close-icon"
             (click)="closeModal()"
           ></ion-icon>
         </div>
+
         <div class="modal-body">
-          <p>Status: {{ selectedItem.status }}</p>
-          <p>Total Amount: Rp {{ selectedItem.total_amount }}</p>
-          <p>Username: {{ selectedItem.user.username || 'N/A' }}</p>
+          <div class="info-section">
+            <p><strong>Name: </strong> {{ selectedItem.user?.name || '-' }}</p>
+            <p><strong>Title: </strong> {{ selectedItem.title || '-' }}</p>
+          </div>
 
-          <h4>Items:</h4>
-          <ul>
-            <li *ngFor="let i of selectedItem.items">
-              {{ i.item_name }} - {{ i.specification }} - {{ i.quantity }} {{
-              i.unit }} &#64; Rp {{ i.unit_price }}
-            </li>
-          </ul>
-
-          <!-- Progress Status -->
-          <div class="progress-status">
-            <div class="step">
-              <ion-icon
-                name="create-outline"
-                [class.active-orange]="isAtLeastStep(1)"
-                [class.active-green]="isFinalStep()"
-              ></ion-icon>
-              <p>Create</p>
-            </div>
-
-            <div
-              class="line"
-              [ngClass]="{
-                'line-orange': isAtLeastStep(2) && !isFinalStep(),
-                'line-green': isFinalStep()
-              }"
-            ></div>
-
-            <div class="step">
-              <ion-icon
-                name="checkmark-done-outline"
-                [class.active-orange]="isAtLeastStep(2)"
-                [class.active-green]="isFinalStep()"
-              ></ion-icon>
-              <p>Manager</p>
-            </div>
-
-            <div
-              class="line"
-              [ngClass]="{
-                'line-orange': isAtLeastStep(3) && !isFinalStep(),
-                'line-green': isFinalStep()
-              }"
-            ></div>
-
-            <div class="step">
-              <ion-icon
-                name="cash-outline"
-                [class.active-orange]="isAtLeastStep(3)"
-                [class.active-green]="isFinalStep()"
-              ></ion-icon>
-              <p>Tender</p>
-            </div>
-
-            <div
-              class="line"
-              [ngClass]="{
-                'line-green': isFinalStep()
-              }"
-            ></div>
-
-            <div class="step">
-              <ion-icon
-                name="checkmark-circle-outline"
-                [class.active-green]="isFinalStep()"
-              ></ion-icon>
-              <p>Finish</p>
+          <div class="icon-section">
+            <ion-icon
+              size="large"
+              [name]="selectedItem.status === 'approved_manager' ? 'checkmark-circle' : 'close-circle'"
+              [class.approve]="selectedItem.status === 'approved_manager'"
+              [class.reject]="selectedItem.status === 'rejected_manager'"
+            ></ion-icon>
+            <div class="status-info">
+              <p class="status-text">
+                {{ selectedItem.status === 'approved_manager' ? 'Approved' :
+                selectedItem.status === 'rejected_manager' ? 'Rejected' :
+                selectedItem.status }}
+              </p>
+              <p class="approval-date">
+                ({{ selectedItem.approver_date | date: 'dd-MM-yyyy' }})
+              </p>
             </div>
           </div>
         </div>
