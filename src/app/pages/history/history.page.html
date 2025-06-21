@@ -1,17 +1,121 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>history</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div>
+          <p>History</p>
+        </div>
+      </div>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">history</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="card-container">
+      <div *ngFor="let item of data">
+        <div class="card" [ngClass]="getStatusClass(item.status)">
+          <div class="header-info">
+            <h3>{{ item.no_reg }}</h3>
+            <p>{{ item.created_at | date: 'dd-MMM-yyyy' }}</p>
+          </div>
+
+          <p>Total Amount: Rp {{ item.total_amount }}</p>
+          <p>Username: {{ item.user.username || 'N/A' }}</p>
+
+          <div class="status-show-container">
+            <span class="status-label" [ngClass]="getStatusClass(item.status)">
+              {{ item.status }}
+            </span>
+            <p class="show-detail" (click)="openDetail(item)">Show Detail</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" *ngIf="selectedItem">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>{{ selectedItem.no_reg }}</h2>
+          <ion-icon
+            name="close"
+            class="close-icon"
+            (click)="closeModal()"
+          ></ion-icon>
+        </div>
+        <div class="modal-body">
+          <p>Status: {{ selectedItem.status }}</p>
+          <p>Total Amount: Rp {{ selectedItem.total_amount }}</p>
+          <p>Username: {{ selectedItem.user.username || 'N/A' }}</p>
+
+          <h4>Items:</h4>
+          <ul>
+            <li *ngFor="let i of selectedItem.items">
+              {{ i.item_name }} - {{ i.specification }} - {{ i.quantity }} {{
+              i.unit }} &#64; Rp {{ i.unit_price }}
+            </li>
+          </ul>
+
+          <!-- Progress Status -->
+          <div class="progress-status">
+            <div class="step">
+              <ion-icon
+                name="create-outline"
+                [class.active-orange]="isAtLeastStep(1)"
+                [class.active-green]="isFinalStep()"
+              ></ion-icon>
+              <p>Create</p>
+            </div>
+
+            <div
+              class="line"
+              [ngClass]="{
+                'line-orange': isAtLeastStep(2) && !isFinalStep(),
+                'line-green': isFinalStep()
+              }"
+            ></div>
+
+            <div class="step">
+              <ion-icon
+                name="checkmark-done-outline"
+                [class.active-orange]="isAtLeastStep(2)"
+                [class.active-green]="isFinalStep()"
+              ></ion-icon>
+              <p>Manager</p>
+            </div>
+
+            <div
+              class="line"
+              [ngClass]="{
+                'line-orange': isAtLeastStep(3) && !isFinalStep(),
+                'line-green': isFinalStep()
+              }"
+            ></div>
+
+            <div class="step">
+              <ion-icon
+                name="cash-outline"
+                [class.active-orange]="isAtLeastStep(3)"
+                [class.active-green]="isFinalStep()"
+              ></ion-icon>
+              <p>Tender</p>
+            </div>
+
+            <div
+              class="line"
+              [ngClass]="{
+                'line-green': isFinalStep()
+              }"
+            ></div>
+
+            <div class="step">
+              <ion-icon
+                name="checkmark-circle-outline"
+                [class.active-green]="isFinalStep()"
+              ></ion-icon>
+              <p>Finish</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
-
-<!-- <ion-footer>
-  <app-tab-footer></app-tab-footer>
-</ion-footer> -->

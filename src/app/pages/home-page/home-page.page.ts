@@ -21,7 +21,6 @@ export class HomePagePage implements OnInit {
     const user = localStorage.getItem('user');
     if (user) {
       const parsedUser = JSON.parse(user);
-      // console.log('Parsed user:', parsedUser);
       this.name = parsedUser?.user.name || '';
     }
     //  Format hari & tanggal
@@ -34,19 +33,19 @@ export class HomePagePage implements OnInit {
     };
     this.todayDate = today.toLocaleDateString('id-ID', options);
 
-    // Simulasi jumlah notifikasi
-    // Load dari localStorage dulu
     this.notificationCount = this.notificationService.getNotificationCount();
 
     // Lalu fetch dari API & update count
     this.notificationService.fetchNotifications().subscribe(() => {
+      this.notificationService.resetSeenStatusIfNewNotifications();
       this.notificationCount = this.notificationService.getNotificationCount();
     });
   }
 
   openFilter() {
     console.log('Navigating to notifications...');
-    console.log('Navigating to notifications...');
     this.router.navigate(['/notifications']);
+    this.notificationService.markAsSeen(); // ✅ tandai sudah dilihat
+    this.notificationCount = 0; // ✅ perbarui badge
   }
 }
