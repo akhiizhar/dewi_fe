@@ -1,31 +1,44 @@
-<ion-content>
-  <div class="dashboard-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-content">
-        <div class="header-title" (click)="goBack()">
-          <ion-icon size="large" name="arrow-back-outline"></ion-icon>
-          <p>Notifications</p>
-        </div>
-      </div>
-    </div>
+<ion-header class="custom-ion-header">
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-    <div class="notifications-list">
-      <div class="notification-item" *ngFor="let notification of notifications">
-        <div class="notification-header">
-          <h3>{{ notification.title }}</h3>
+<ion-content class="ion-no-padding">
+  <div class="notifications-list">
+    <div class="notification-item" *ngFor="let notification of notifications">
+      <div class="notification-grid">
+        <!-- Grid 1: Icon -->
+        <div class="icon-area">
+          <ion-icon name="hourglass" class="notif-icon"></ion-icon>
+        </div>
+
+        <!-- Grid 2: Title, Description, User -->
+        <div class="content-area">
+          <div class="title-date-group">
+            <h3>{{ notification.title }}</h3>
+          </div>
+          <p class="notification-description">{{ notification.description }}</p>
+          <div class="user-message-group">
+            <p class="notification-user">{{ notification.user.name }}</p>
+          </div>
+        </div>
+
+        <!-- Grid 3: Date, Message -->
+        <div class="side-area">
           <span class="notification-date">
             {{ notification.due_date | date: 'dd-MMM-yyyy' }}
           </span>
+          <span></span>
+          <span class="approval-label" *ngIf="notification.message">
+            {{ notification.message }}
+          </span>
         </div>
-
-        <p class="notification-description">{{ notification.description }}</p>
-        <p>{{ notification.user.name }}</p>
-
-        <!-- Message di pojok kiri bawah -->
-        <span class="approval-label" *ngIf="notification.message">
-          {{ notification.message }}
-        </span>
       </div>
     </div>
   </div>

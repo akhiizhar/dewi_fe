@@ -1,50 +1,49 @@
+ion-content {
+  --background: #f8f9fa !important;
+}
+
+ion-toolbar.header {
+  background-color: #3f51b5 !important;
+  --background: #3f51b5 !important;
+  --color: #ffffff !important;
+  color: #ffffff;
+}
+
+ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
 .dashboard-container {
   max-width: 500px;
   margin: 0 auto;
-  background-color: white;
+  background-color: transparent;
   min-height: 100%;
 }
 
-// .header {
-//   position: fixed;
-//   top: 0;
-//   width: 100%;
-//   background-color: #3f51b5;
-//   color: white;
-//   padding-left: 16px;
-//   padding-right: 16px;
-//   margin-bottom: 16px;
-//   z-index: 1000;
-
-//   p {
-//     font-weight: bold;
-//     font-size: 18px;
-//   }
-// }
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #3f51b5;
-  color: white;
-  padding-top: env(safe-area-inset-top); // untuk iOS modern
-  padding-top: constant(safe-area-inset-top); // fallback lama
-  padding-top: 20px; // fallback default utk Android
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 12px;
-  z-index: 1000;
-
-  p {
-    font-weight: bold;
-    font-size: 18px;
-  }
+.card-container {
+  padding: 12px;
+  margin-top: 5px;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.card {
+  border: 1px solid #ccc;
+  border-left: 6px solid transparent;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  font-size: 14px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  h3,
+  p {
+    margin: 4px 0;
+    color: #333;
+  }
 }
 
 .header-info {
@@ -53,66 +52,30 @@
   align-items: center;
 
   h3 {
-    color: #333;
-    margin: 0;
     font-size: 18px;
     font-weight: bold;
-  }
-}
-
-.card-container {
-  padding: 12px;
-  margin-top: 80px;
-}
-
-.card {
-  border: 1px solid #ccc;
-  border-left: 6px solid transparent;
-  border-radius: 10px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  background-color: #fff;
-  position: relative;
-  font-size: 14px;
-  max-width: 460px;
-
-  h3,
-  p {
+    margin: 0;
     color: #333;
-    margin: 4px 0;
   }
-}
 
-.status-approved {
-  border-left-color: #07a721 !important;
-  color: #07a721;
-}
-.status-in-tender {
-  border-left-color: #e46f00 !important;
-  color: #e46f00;
-}
-.status-rejected {
-  border-left-color: #ea3829 !important;
-  color: #ea3829;
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
 }
 
 .status-show-container {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-top: 10px;
-  span {
-    font-size: 16px;
-    font-weight: bold;
-  }
 }
 
 .status-label {
   font-weight: bold;
-  text-transform: capitalize;
   font-size: 13px;
+  text-transform: capitalize;
   margin-bottom: 4px;
 }
 
@@ -120,12 +83,27 @@
   color: #3880ff;
   text-decoration: underline;
   cursor: pointer;
-  font-weight: 500;
   font-size: 13px;
+  font-weight: 500;
 }
 
-/* Modal */
-/* Modal */
+/* Status Color Border + Text */
+.status-approved {
+  border-left-color: #07a721 !important;
+  color: #07a721;
+}
+
+.status-rejected {
+  border-left-color: #ea3829 !important;
+  color: #ea3829;
+}
+
+.status-in-tender {
+  border-left-color: #e46f00 !important;
+  color: #e46f00;
+}
+
+/* Modal Styling */
 .modal {
   position: fixed;
   top: 0;
@@ -140,12 +118,11 @@
 }
 
 .modal-content {
-  background: white;
+  background: #ffffff;
   width: 90%;
   max-width: 400px;
   padding: 20px;
   border-radius: 12px;
-  position: relative;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -156,23 +133,20 @@
 }
 
 .no-reg-container {
-  display: flex;
-  flex-direction: column;
   line-height: 1.2;
-  margin: 0;
 }
 
 .no-reg {
   font-size: 20px;
   font-weight: bold;
-  margin: 0; // Hilangkan gap bawah
+  margin: 0;
+  color: #333;
 }
 
 .created-at {
   font-size: 13px;
   color: gray;
-  margin: 0; // Hilangkan gap atas
-  margin-top: 2px; // Sedikit spasi rapat
+  margin-top: 2px;
 }
 
 .close-icon {
@@ -183,56 +157,75 @@
 
 .modal-body {
   margin-top: 16px;
+}
 
-  .info-section {
-    font-size: 16px;
-    margin-bottom: 10px;
+.info-section {
+  font-size: 16px;
+  margin-bottom: 10px;
 
-    p {
-      margin: 4px 0;
+  p {
+    margin: 4px 0;
+    color: #333;
+  }
+}
+
+.icon-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  ion-icon {
+    font-size: 56px;
+  }
+
+  .approve {
+    color: #07a721;
+    width: 100px;
+    height: 100px;
+  }
+
+  .reject {
+    color: #ea3829;
+    width: 100px;
+    height: 100px;
+  }
+
+  .status-info {
+    margin-top: 20px;
+
+    .status-text {
+      font-size: 16px;
+      font-weight: bold;
       color: #333;
     }
-  }
 
-  .icon-section {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    ion-icon {
-      font-size: 56px;
-      margin-bottom: 0;
-    }
-
-    .approve {
-      color: #07a721;
-      height: 100px;
-      width: 100px;
-    }
-
-    .reject {
-      color: #ea3829;
-      height: 100px;
-      width: 100px;
-    }
-
-    .status-info {
-      line-height: 1.2;
-      margin-top: 20px;
-
-      .status-text {
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
-        margin: 0;
-      }
-
-      .approval-date {
-        font-size: 14px;
-        color: gray;
-        margin-top: 2px;
-      }
+    .approval-date {
+      font-size: 14px;
+      color: gray;
     }
   }
+}
+
+.loading-container,
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  color: #666;
+  text-align: center;
+}
+
+.loading-container ion-spinner {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+}
+
+.no-data-icon {
+  font-size: 64px;
+  color: #ccc;
+  margin-bottom: 12px;
 }

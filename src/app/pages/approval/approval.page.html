@@ -1,15 +1,26 @@
-<ion-content>
-  <div class="dashboard-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-content">
-        <div>
-          <p>Approval</p>
-        </div>
-      </div>
-    </div>
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-title>Approval</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true" [scrollEvents]="true">
+  <div class="dashboard-container">
     <div class="notifications-list">
+      <!-- Loading -->
+      <ion-spinner
+        name="crescent"
+        *ngIf="loading"
+        class="center-spinner"
+      ></ion-spinner>
+
+      <!-- No data -->
+      <div class="no-data" *ngIf="!loading && approvals.length === 0">
+        <ion-icon name="tray-outline" size="large"></ion-icon>
+        <p>Tidak ada data</p>
+      </div>
+
+      <!-- List approval -->
       <div
         class="notification-item"
         *ngFor="let approval of approvals"
@@ -25,7 +36,6 @@
         <p class="notification-description">{{ approval.description }}</p>
         <p>{{ approval.user?.name }}</p>
 
-        <!-- Message di pojok kiri bawah -->
         <span class="approval-label" *ngIf="approval.message">
           {{ approval.message }}
         </span>

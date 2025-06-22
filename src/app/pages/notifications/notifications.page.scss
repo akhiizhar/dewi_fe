@@ -1,36 +1,30 @@
-.dashboard-container {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: white;
-  min-height: 100%;
+:host {
+  ion-content {
+    --background: #f4f6fa;
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #3f51b5;
-  color: white;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 16px;
-  z-index: 1000;
+.custom-ion-header {
+  --background: #3f51b5;
+  --color: #ffffff;
+  padding-top: env(safe-area-inset-top);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.header p {
+
+.custom-toolbar {
+  --background: #3f51b5;
+  color: #ffffff;
+}
+
+ion-button {
+  color: #ffffff;
+}
+
+.custom-title {
   font-size: 18px;
   font-weight: bold;
-}
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-title {
-  flex-direction: row; /* Ensures the icon and text are side by side */
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color: #ffffff;
 }
 
 .notifications-list {
@@ -38,46 +32,98 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  padding-top: 72px; /* bisa juga di sini */
+  padding-top: 16px;
 }
 
 .notification-item {
-  position: relative;
+  background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 16px;
-  background-color: #fff;
+  padding: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.notification-header {
+.notification-grid {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.icon-area {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
-.notification-header h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+.notif-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e46f00;
 }
 
-.notification-date {
-  font-size: 14px;
-  color: gray;
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .title-date-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  .notification-description {
+    font-size: 14px;
+    color: #444;
+    margin: 0;
+  }
+
+  .user-message-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .notification-user {
+      font-size: 13px;
+      color: #444;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
 }
 
-.notification-description {
-  margin: 12px 0;
-  font-size: 15px;
-  color: #333;
-}
+.side-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding-top: 2px;
 
-.approval-label {
-  position: absolute;
-  bottom: 12px;
-  right: 16px;
-  font-size: 13px;
-  font-weight: bold;
-  color: orange;
+  .notification-date {
+    font-size: 12px;
+    color: #888;
+    align-self: flex-start; /* Move date to the top */
+  }
+
+  .approval-label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #e46f00;
+    text-align: right;
+    align-self: flex-start; /* Align with username */
+  }
 }

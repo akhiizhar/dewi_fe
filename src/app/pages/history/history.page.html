@@ -1,15 +1,25 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-title>History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <div class="dashboard-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-content">
-        <div>
-          <p>History</p>
-        </div>
-      </div>
+    <!-- LOADING SPINNER -->
+    <div class="loading-container" *ngIf="isLoading">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Loading data...</p>
     </div>
 
-    <div class="card-container">
+    <!-- NO DATA -->
+    <div class="no-data-container" *ngIf="!isLoading && data.length === 0">
+      <ion-icon name="tray-outline" class="no-data-icon"></ion-icon>
+      <p>No data found</p>
+    </div>
+
+    <!-- DATA LIST -->
+    <div class="card-container" *ngIf="!isLoading && data.length > 0">
       <div *ngFor="let item of data">
         <div class="card" [ngClass]="getStatusClass(item.status)">
           <div class="header-info">
@@ -18,12 +28,16 @@
           </div>
 
           <p>Total Amount: Rp {{ item.total_amount | number:'1.0-0' }},-</p>
-          <p>Username: {{ item.user.name || '-' }}</p>
+          <p>Name: {{ item.user.name || '-' }}</p>
 
           <div class="status-show-container">
             <span class="status-label" [ngClass]="getStatusClass(item.status)">
               {{ item.status === 'approved_manager' ? 'Approved' : item.status
-              === 'rejected_manager' ? 'Rejected' : item.status }}
+              === 'rejected_manager' ? 'Rejected by Manager' : item.status ===
+              'rejected_purchasing' ? 'Rejected by Purchasing' : item.status ===
+              'in_tender' ? 'In Tender' : item.status === 'finish' ? 'Finished'
+              : item.status === 'waiting_approval' ? 'Waiting Approval' :
+              item.status }}
             </span>
             <p class="show-detail" (click)="openDetail(item)">Show Detail</p>
           </div>
@@ -31,8 +45,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <!-- Modal -->
+    <!-- MODAL -->
     <div class="modal" *ngIf="selectedItem">
       <div class="modal-content">
         <div class="modal-header">
@@ -51,22 +64,33 @@
 
         <div class="modal-body">
           <div class="info-section">
-            <p><strong>Name: </strong> {{ selectedItem.user?.name || '-' }}</p>
-            <p><strong>Title: </strong> {{ selectedItem.title || '-' }}</p>
+            <p><strong>Name:</strong> {{ selectedItem.user?.name || '-' }}</p>
+            <p><strong>Title:</strong> {{ selectedItem.title || '-' }}</p>
           </div>
 
           <div class="icon-section">
             <ion-icon
               size="large"
-              [name]="selectedItem.status === 'approved_manager' ? 'checkmark-circle' : 'close-circle'"
-              [class.approve]="selectedItem.status === 'approved_manager'"
-              [class.reject]="selectedItem.status === 'rejected_manager'"
+              [name]="selectedItem.status === 'approved_manager' ? 'checkmark-circle' :
+                  selectedItem.status === 'rejected_manager' ? 'close-circle' :
+                  selectedItem.status === 'rejected_purchasing' ? 'close-circle' :
+                  selectedItem.status === 'waiting_approval' ? 'hourglass' :
+                  selectedItem.status === 'in_tender' ? 'hammer' :
+                  selectedItem.status === 'finish' ? 'checkmark-done-circle' : 'help-circle'"
+              [class.approve]="selectedItem.status === 'approved_manager' || selectedItem.status === 'finish'"
+              [class.reject]="selectedItem.status === 'rejected_manager' || selectedItem.status === 'rejected_purchasing'"
+              [class.waiting]="selectedItem.status === 'waiting_approval'"
+              [class.tender]="selectedItem.status === 'in_tender'"
             ></ion-icon>
             <div class="status-info">
               <p class="status-text">
                 {{ selectedItem.status === 'approved_manager' ? 'Approved' :
-                selectedItem.status === 'rejected_manager' ? 'Rejected' :
-                selectedItem.status }}
+                selectedItem.status === 'rejected_manager' ? 'Rejected by
+                Manager' : selectedItem.status === 'rejected_purchasing' ?
+                'Rejected by Purchasing' : selectedItem.status ===
+                'waiting_approval' ? 'Waiting Approval' : selectedItem.status
+                === 'in_tender' ? 'In Tender' : selectedItem.status === 'finish'
+                ? 'Finished' : selectedItem.status }}
               </p>
               <p class="approval-date">
                 ({{ selectedItem.approver_date | date: 'dd-MM-yyyy' }})

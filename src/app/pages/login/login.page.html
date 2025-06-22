@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="login-content" fullscreen>
   <div class="login-container">
     <div class="login-box">
       <div class="logo-container">
@@ -6,15 +6,16 @@
           <img
             src="assets/images/logo_dewi.png"
             alt="App Logo"
-            class="plus-icon"
+            class="logo-image"
           />
         </div>
         <span class="logo-text">DEWI System</span>
       </div>
+
       <div class="login-header">
         <h1>Welcome!</h1>
         <p>
-          DEWI's system aims To simplify and accelerate the procurement process
+          DEWI's system aims to simplify and accelerate the procurement process
           for goods and services in a transparent, efficient, and seamless
           integration.
         </p>
@@ -68,6 +69,7 @@
         <div class="form-options">
           <a href="#">Forget password?</a>
         </div>
+
         <div *ngIf="loginErrorMessage" class="error-message">
           {{ loginErrorMessage }}
         </div>
@@ -76,7 +78,7 @@
           <ng-container *ngIf="!isLoading; else loading"> Login </ng-container>
           <ng-template #loading>
             <span
-              class="spinner-border spinner-border-sm"
+              class="spinner-border"
               role="status"
               aria-hidden="true"
             ></span>
@@ -84,6 +86,7 @@
           </ng-template>
         </button>
       </form>
+
       <div class="modal-backdrop" *ngIf="showSuccessModal">
         <div class="modal-content">
           <ion-icon

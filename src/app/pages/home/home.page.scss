@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 1.5rem;
+  padding: calc(env(safe-area-inset-top, 0px) + 1.5rem) 1.5rem 0 1.5rem;
   max-width: 500px;
   margin: 0 auto;
 }
@@ -105,10 +106,15 @@
   --background: #3f51b5;
   --background-hover: #3f51b5;
   --background-focused: #3f51b5;
-  // --color: white;
+  --color: white;
   --border-radius: 50%; /* Membuat tombol menjadi bulat */
-  width: 3rem;
-  height: 3rem;
+  // width: 3rem;
+  // height: 3rem;
+
+  ion-icon {
+    width: 30px;
+    height: 40px;
+  }
 }
 
 // Responsive adjustments

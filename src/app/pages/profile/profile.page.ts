@@ -17,6 +17,8 @@ export class ProfilePage implements OnInit {
     if (userStr) {
       const userObj = JSON.parse(userStr);
       this.user = userObj.user; // Ambil data user dari objek
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 

@@ -1,17 +1,15 @@
-.dashboard-container {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: white;
-  min-height: 100%;
+:host {
+  ion-content {
+    --background: #ffffff;
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
-.header {
+ion-header.header {
   background-color: #3f51b5;
-  color: white;
+  color: #ffffff;
   padding: 16px;
-  padding-top: calc(
-    env(safe-area-inset-top, 0px) + 24px
-  ); // ✅ diturunkan lebih jauh
+  padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
   border-radius: 0 0 24px 24px;
   margin-bottom: 16px;
 }
@@ -26,86 +24,110 @@
   font-size: 18px;
   font-weight: 500;
   margin: 0;
+  color: #ffffff;
 }
 
 .header p {
   font-size: 14px;
   margin: 4px 0 0;
   opacity: 0.9;
+  color: #ffffff;
 }
 
 .filter-button {
-  display: inline-block;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px; /* Added gap between elements */
-  // background-color: #ffffff;
-  color: #fff;
-  // border: none;
-  border-radius: 8px;
-  padding: 4px 8px;
-  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   position: relative;
-}
-.filter-button ion-icon {
-  font-size: 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.filter-button p {
-  margin: 0; /* Hilangkan margin bawaan */
+.filter-button ion-icon {
+  font-size: 20px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #ff3d00;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
   display: flex;
+  justify-content: center;
   align-items: center;
+  z-index: 10;
+}
+
+.dashboard-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffff;
 }
 
 .main-content {
   padding: 0 16px 24px;
-  margin-top: 0;
-  // margin-top: -16px;
 }
 
-.stats-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
-}
+.scroll-cards {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 16px;
+  padding-left: 8px;
+  margin-bottom: 24px;
+  scroll-snap-type: x mandatory;
 
-ion-card {
-  margin: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
+  .scroll-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 145px;
+  }
 
-.card-label {
-  font-size: 14px;
-  color: var(--ion-color-medium);
-  margin: 0 0 4px;
-}
+  ion-card {
+    --background: #ffffff;
 
-.card-value {
-  font-weight: bold;
-  margin: 0;
-}
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin: 0;
+  }
 
-ion-card:first-child .card-value {
-  font-size: 32px;
-}
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
 
-ion-card:last-child .card-value {
-  font-size: 20px;
+  .card-icon {
+    font-size: 20px;
+    color: #3f51b5;
+  }
+
+  .card-title {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+
+  .card-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
 }
 
 .custom-searchbar {
-  --background: white;
+  --background: #ffffff;
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
-  padding: 0;
   margin-bottom: 24px;
 }
 
@@ -118,12 +140,17 @@ ion-card:last-child .card-value {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-}
 
-.budget-header h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  span {
+    font-size: 14px;
+    color: #333;
+  }
 }
 
 .section-header {
@@ -131,18 +158,18 @@ ion-card:last-child .card-value {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-}
 
-.section-header h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-}
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
 
-.section-header a {
-  font-size: 14px;
-  color: var(--ion-color-primary);
-  text-decoration: none;
+  a {
+    font-size: 14px;
+    color: #3f51b5;
+    text-decoration: none;
+  }
 }
 
 .product-grid {
@@ -155,7 +182,7 @@ ion-card:last-child .card-value {
 .request-queue h2 {
   font-size: 18px;
   font-weight: bold;
-  margin: 0 0 16px;
+  margin-bottom: 16px;
 }
 
 .request-list {
@@ -164,36 +191,67 @@ ion-card:last-child .card-value {
   gap: 12px;
 }
 
-// .notification-badge {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   transform: translate(50%, -50%);
-//   background-color: #ff3d00;
-//   color: white;
-//   font-size: 12px;
-//   font-weight: bold;
-//   border-radius: 50%;
-//   width: 20px;
-//   height: 20px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 10;
-// }
-.notification-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background-color: #ff3d00;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
+// trial
+.overview-card {
+  margin-bottom: 24px;
+
+  .overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    span {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  ion-progress-bar {
+    --progress-background: #e0e0e0;
+    --progress-color: #3f51b5;
+    height: 8px;
+    border-radius: 4px;
+  }
+}
+
+.approval-list {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+
+  .approval-item {
+    --background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .approval-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    p {
+      font-size: 12px;
+      color: #666;
+      margin: 2px 0 0;
+    }
+
+    span {
+      font-size: 12px;
+      color: #999;
+    }
+  }
 }

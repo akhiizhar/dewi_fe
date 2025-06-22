@@ -1,2 +1,14 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --ion-background-color: #ffffff !important;
+    --ion-text-color: #000000 !important;
+  }
+}
+
+body.dark {
+  --ion-background-color: #ffffff !important;
+  --ion-text-color: #000000 !important;
+}

@@ -1,91 +1,96 @@
-<ion-content>
-  <div class="dashboard-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-content">
-        <div>
-          <h1>Hi, {{name}}</h1>
-          <p>{{ todayDate }}</p>
-        </div>
-        <div
-          class="filter-button"
-          (click)="openFilter()"
-          style="position: relative"
-        >
-          <ion-icon name="notifications" size="large"></ion-icon>
-          <span class="notification-badge" *ngIf="notificationCount > 0">
-            {{ notificationCount }}
-          </span>
-        </div>
+<ion-header class="header">
+  <div class="header-content">
+    <div>
+      <h1>Hi, {{ name }}</h1>
+      <p>{{ todayDate }}</p>
+    </div>
+    <div
+      class="filter-button"
+      (click)="openFilter()"
+      style="position: relative"
+    >
+      <ion-icon name="notifications" size="large"></ion-icon>
+      <span class="notification-badge" *ngIf="notificationCount > 0">
+        {{ notificationCount }}
+      </span>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class="dashboard-container" fullscreen>
+  <div class="main-content">
+    <!-- Horizontal Scroll Cards -->
+    <div class="scroll-cards">
+      <div class="scroll-card" *ngFor="let stat of statusCards">
+        <ion-card>
+          <ion-card-content>
+            <div class="card-header">
+              <ion-icon [name]="stat.icon" class="card-icon"></ion-icon>
+              <p class="card-title">{{ stat.title }}</p>
+            </div>
+            <p class="card-value">{{ stat.value }}</p>
+          </ion-card-content>
+        </ion-card>
       </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-      <!-- Stats Cards -->
-      <div class="stats-cards">
-        <ion-card>
-          <ion-card-content>
-            <p class="card-label">Request Order</p>
-            <!-- <p class="card-value">{{ requestOrderCount }}</p> -->
-          </ion-card-content>
-        </ion-card>
-        <ion-card>
-          <ion-card-content>
-            <p class="card-label">Budget Remaining</p>
-            <!-- <p class="card-value">{{ budgetRemaining }}</p> -->
-          </ion-card-content>
-        </ion-card>
-      </div>
-
-      <!-- Search Bar -->
-      <ion-searchbar
-        placeholder="Search Products..."
-        class="custom-searchbar"
-      ></ion-searchbar>
-
-      <!-- Monthly Budget -->
-      <ion-card class="budget-card">
+    <!-- Stats Cards -->
+    <!-- <div class="stats-cards">
+      <ion-card>
         <ion-card-content>
-          <div class="budget-header">
-            <h2>Monthly Budget</h2>
-            <span>2025</span>
-          </div>
-          <!-- <app-budget-chart></app-budget-chart> -->
+          <p class="card-label">Request Order</p>
         </ion-card-content>
       </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <p class="card-label">Budget Remaining</p>
+        </ion-card-content>
+      </ion-card>
+    </div> -->
 
-      <!-- Recommendations -->
-      <div class="recommendations">
-        <div class="section-header">
-          <h2>Recomendations for you</h2>
-          <a href="#">See all product</a>
-        </div>
+    <!-- Search Bar -->
+    <!-- <ion-searchbar
+      placeholder="Search Products..."
+      class="custom-searchbar"
+    ></ion-searchbar> -->
 
-        <div class="product-grid">
-          <!-- <app-product-category
-            *ngFor="let category of productCategories"
-            [icon]="category.icon"
-            [title]="category.title"
-          >
-          </app-product-category> -->
-        </div>
+    <!-- Recommendations -->
+    <!-- <div class="recommendations">
+      <div class="section-header">
+        <h2>Recommendations for you</h2>
+        <a href="#">See all product</a>
       </div>
-
-      <!-- Purchase Request Queue -->
-      <div class="request-queue">
-        <h2>Purchase Request Queue</h2>
-        <div class="request-list">
-          <!-- <app-request-item
-            *ngFor="let item of requestItems"
-            [status]="item.status"
-            [title]="item.title"
-            [code]="item.code"
-            [date]="item.date"
-          >
-          </app-request-item> -->
+      <div class="product-grid"></div>
+    </div> -->
+    <!-- trial -->
+    <!-- Budget Overview Card -->
+    <ion-card class="overview-card">
+      <ion-card-content>
+        <div class="overview-header">
+          <h2>Monthly Budget</h2>
+          <span>Rp 12.000.000 / Rp 15.000.000</span>
         </div>
-      </div>
+        <ion-progress-bar value="0.8" color="primary"></ion-progress-bar>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Pending Approval List -->
+    <div class="section-header">
+      <h2>Pending Approvals</h2>
+      <a>View All</a>
+    </div>
+    <div class="approval-list">
+      <ion-card class="approval-item" *ngFor="let item of pendingApprovals">
+        <ion-card-content>
+          <div class="approval-info">
+            <div>
+              <h3>{{ item.requester }}</h3>
+              <p>{{ item.itemName }}</p>
+            </div>
+            <span>{{ item.date }}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </div>
   </div>
 </ion-content>

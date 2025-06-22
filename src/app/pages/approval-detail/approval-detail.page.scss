@@ -1,55 +1,48 @@
+ion-content {
+  --background: #f8f9fa !important;
+  min-height: 100vh;
+}
+
+ion-toolbar.header {
+  background-color: #3f51b5 !important;
+  --background: #3f51b5 !important;
+  --color: #ffffff !important;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  // gap: 5px;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+
+ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-bottom: 16px;
+  background-color: #f8f9fa;
+  height: 100%;
+  margin-top: 16px;
 }
 
 .content-padding {
-  padding: 0 16px;
+  padding: 0 16px 100px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-bottom: 100px;
-}
-
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: #3f51b5;
-  color: white;
-  // padding: 16px;
-  padding: calc(16px + env(safe-area-inset-top)) 16px 16px 16px;
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-}
-
-.header-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.header-title p {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.header-spacer {
-  // height: 60px;
-  height: calc(60px + env(safe-area-inset-top));
 }
 
 .box {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -95,14 +88,19 @@
   color: white;
 }
 
-.custom-textarea {
+.scrollable-table td {
+  background-color: #ffffff;
+  color: #333;
+}
+
+.note-input {
   width: 100%;
   border-radius: 8px;
   padding: 10px;
   border: 1px solid #ccc;
   resize: vertical;
   font-size: 14px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 
 .action-buttons-horizontal {
@@ -126,13 +124,14 @@
 }
 
 .modal-box {
-  background-color: white;
+  background-color: #ffffff;
   padding: 24px;
   border-radius: 10px;
   width: 90%;
   max-width: 400px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: #333;
 }
 
 .modal-buttons {

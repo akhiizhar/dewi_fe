@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-approval',
@@ -13,33 +13,34 @@ import { map, tap } from 'rxjs/operators';
 export class ApprovalPage implements OnInit {
   approvals: any[] = [];
   apiUrl = environment.apiUrl;
+  loading = true;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    // Ambil data dari API
     this.fetchNotificationsFromApi();
   }
 
   fetchNotificationsFromApi() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      // Tambah Authorization kalau perlu
-      // 'Authorization': `Bearer ${your_token}`
-    });
+    this.loading = true;
 
     this.http
-      .get<{ data: any[] }>(`${this.apiUrl}/pr/pending_approval_ajax`, {
-        headers,
-      })
+      .get<{ data: any[] }>(`${this.apiUrl}/pr/pending_approval_ajax`)
       .pipe(
         map((res) => res.data || []),
         tap((data) => {
           this.approvals = data;
           localStorage.setItem('notifications', JSON.stringify(data));
+        }),
+        finalize(() => {
+          this.loading = false;
         })
       )
-      .subscribe();
+      .subscribe({
+        error: (err) => {
+          console.error('Failed to fetch approvals:', err);
+        },
+      });
   }
 
   goToDetail(approval: any) {

@@ -1,20 +1,15 @@
-<ion-content [fullscreen]="true" [scrollEvents]="true">
-  <div class="dashboard-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-content">
-        <div class="header-title" (click)="goBack()">
-          <ion-icon size="large" name="arrow-back-outline"></ion-icon>
-          <p>Detail Approval</p>
-        </div>
-      </div>
+<ion-header>
+  <ion-toolbar class="header">
+    <div class="header-row" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      <ion-title>Detail Approval</ion-title>
     </div>
+  </ion-toolbar>
+</ion-header>
 
-    <!-- Spacer untuk header -->
-    <div class="header-spacer"></div>
-
+<ion-content [fullscreen]="true" [scrollEvents]="true" keyboard-attach>
+  <div class="dashboard-container">
     <div class="content-padding">
-      <!-- No. Reg Header -->
       <div class="card-header box">
         <h2>{{ approval?.no_reg }}</h2>
         <p class="subtitle">
@@ -34,8 +29,8 @@
           <strong>Deskripsi:</strong><span>{{ approval?.description }}</span>
         </div>
         <div class="info-row">
-          <strong>Total Amount:</strong
-          ><span>Rp {{ approval?.total_amount | number:'1.0-0' }},-</span>
+          <strong>Total Amount:</strong>
+          <span>Rp {{ approval?.total_amount | number:'1.0-0' }},-</span>
         </div>
       </div>
 
@@ -73,6 +68,7 @@
           [(ngModel)]="note"
           placeholder="Tambahkan catatan di sini..."
           autoGrow="true"
+          class="note-input"
         ></ion-textarea>
       </div>
 
@@ -95,7 +91,8 @@
       </div>
     </div>
   </div>
-  <!-- Custom Modal -->
+
+  <!-- Modal -->
   <div class="modal-backdrop" *ngIf="showModal">
     <div class="modal-box">
       <h3>Confirmation</h3>
