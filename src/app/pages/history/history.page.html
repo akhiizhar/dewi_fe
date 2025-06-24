@@ -26,18 +26,18 @@
             <h3>{{ item.no_reg }}</h3>
             <p>{{ item.created_at | date: 'dd-MMM-yyyy' }}</p>
           </div>
-
+          <h1 class="tittle">{{ item.title || '-' }}</h1>
           <p>Total Amount: Rp {{ item.total_amount | number:'1.0-0' }},-</p>
           <p>Name: {{ item.user.name || '-' }}</p>
 
           <div class="status-show-container">
             <span class="status-label" [ngClass]="getStatusClass(item.status)">
-              {{ item.status === 'approved_manager' ? 'Approved' : item.status
-              === 'rejected_manager' ? 'Rejected by Manager' : item.status ===
-              'rejected_purchasing' ? 'Rejected by Purchasing' : item.status ===
-              'in_tender' ? 'In Tender' : item.status === 'finish' ? 'Finished'
-              : item.status === 'waiting_approval' ? 'Waiting Approval' :
-              item.status }}
+              {{ item.status === 'approved_manager' ? 'Approved by Manager' :
+              item.status === 'rejected_manager' ? 'Rejected by Manager' :
+              item.status === 'rejected_purchasing' ? 'Rejected by Purchasing' :
+              item.status === 'in_tender' ? 'In Tender' : item.status ===
+              'finish' ? 'Finished' : item.status === 'waiting_approval' ?
+              'Waiting Approval' : item.status }}
             </span>
             <p class="show-detail" (click)="openDetail(item)">Show Detail</p>
           </div>

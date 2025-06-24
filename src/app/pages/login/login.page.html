@@ -77,12 +77,9 @@
         <button type="submit" class="submit-btn" [disabled]="isLoading">
           <ng-container *ngIf="!isLoading; else loading"> Login </ng-container>
           <ng-template #loading>
-            <span
-              class="spinner-border"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Logging in...
+            Logging in
+            <span class="spinner-border" role="status" aria-hidden="true">
+            </span>
           </ng-template>
         </button>
       </form>
