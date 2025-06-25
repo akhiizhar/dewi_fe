@@ -4,11 +4,7 @@
       <h1>Hi, {{ name }}</h1>
       <p>{{ todayDate }}</p>
     </div>
-    <div
-      class="filter-button"
-      (click)="openFilter()"
-      style="position: relative"
-    >
+    <div class="filter-button" (click)="openFilter()">
       <ion-icon name="notifications" size="large"></ion-icon>
       <span class="notification-badge" *ngIf="notificationCount > 0">
         {{ notificationCount }}
@@ -19,9 +15,14 @@
 
 <ion-content class="dashboard-container" fullscreen>
   <div class="main-content">
-    <!-- Horizontal Scroll Cards -->
+    <!-- Scroll Cards -->
     <div class="scroll-cards">
-      <div class="scroll-card" *ngFor="let stat of statusCards">
+      <div
+        class="scroll-card"
+        *ngFor="let stat of statusCards"
+        [class.active]="activeStatus === stat.key"
+        (click)="onStatusCardClick(stat.key)"
+      >
         <ion-card>
           <ion-card-content>
             <div class="card-header">
@@ -34,63 +35,36 @@
       </div>
     </div>
 
-    <!-- Stats Cards -->
-    <!-- <div class="stats-cards">
-      <ion-card>
-        <ion-card-content>
-          <p class="card-label">Request Order</p>
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-content>
-          <p class="card-label">Budget Remaining</p>
-        </ion-card-content>
-      </ion-card>
-    </div> -->
-
     <!-- Search Bar -->
-    <!-- <ion-searchbar
-      placeholder="Search Products..."
+    <ion-searchbar
+      placeholder="Search"
       class="custom-searchbar"
-    ></ion-searchbar> -->
+    ></ion-searchbar>
 
-    <!-- Recommendations -->
-    <!-- <div class="recommendations">
-      <div class="section-header">
-        <h2>Recommendations for you</h2>
-        <a href="#">See all product</a>
-      </div>
-      <div class="product-grid"></div>
-    </div> -->
-    <!-- trial -->
-    <!-- Budget Overview Card -->
-    <ion-card class="overview-card">
-      <ion-card-content>
-        <div class="overview-header">
-          <h2>Monthly Budget</h2>
-          <span>Rp 12.000.000 / Rp 15.000.000</span>
-        </div>
-        <ion-progress-bar value="0.8" color="primary"></ion-progress-bar>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Pending Approval List -->
-    <div class="section-header">
-      <h2>Pending Approvals</h2>
-      <a>View All</a>
+    <!-- Filtered List -->
+    <div class="section-header" *ngIf="filteredData.length >= 0">
+      <h2>{{ activeStatus | titlecase }}</h2>
+      <a (click)="viewAllPending()">View All</a>
     </div>
+
     <div class="approval-list">
-      <ion-card class="approval-item" *ngFor="let item of pendingApprovals">
+      <ion-card class="approval-item" *ngFor="let item of filteredData">
         <ion-card-content>
           <div class="approval-info">
             <div>
-              <h3>{{ item.requester }}</h3>
-              <p>{{ item.itemName }}</p>
+              <h3>{{ item.title }}</h3>
+              <p>
+                {{ item.no_reg }} • Rp{{ item.total_amount | number: '1.0-0' }}
+              </p>
             </div>
-            <span>{{ item.date }}</span>
+            <span>{{ item.due_date | date: 'dd MMM yyyy' }}</span>
           </div>
         </ion-card-content>
       </ion-card>
+    </div>
+
+    <div *ngIf="filteredData.length === 0" class="empty-state">
+      <p>Belum ada data untuk status ini.</p>
     </div>
   </div>
 </ion-content>

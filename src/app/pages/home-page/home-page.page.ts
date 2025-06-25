@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.page.html',
@@ -15,19 +16,11 @@ export class HomePagePage implements OnInit {
   notificationCount = 0;
   apiUrl = environment.apiUrl;
 
-  statusCards: { title: string; value: number; icon: string }[] = [];
-  pendingApprovals = [
-    {
-      requester: 'Andi Saputra',
-      itemName: 'Laptop Dell XPS',
-      date: '20 Jun 2025',
-    },
-    {
-      requester: 'Budi Santoso',
-      itemName: 'Printer Epson',
-      date: '21 Jun 2025',
-    },
-  ];
+  statusCards: { title: string; value: number; icon: string; key: string }[] =
+    [];
+  activeStatus: string = 'total';
+  filteredData: any[] = [];
+  rawData: any = {};
 
   constructor(
     private router: Router,
@@ -64,26 +57,90 @@ export class HomePagePage implements OnInit {
   fetchStatusCount() {
     this.http.get<any>(`${this.apiUrl}/status_count`).subscribe({
       next: (response) => {
-        console.log('Status count fetched:', response);
+        this.rawData = response;
 
         this.statusCards = [
-          { title: 'Total', value: response.total_data, icon: 'layers' },
-          { title: 'Done', value: response.done, icon: 'checkmark-done' },
-          { title: 'In Progress', value: response.in_progress, icon: 'time' },
-          { title: 'In Tender', value: response.in_tender, icon: 'pricetag' },
-          { title: 'Rejected', value: response.rejected, icon: 'close-circle' },
+          {
+            title: 'Total',
+            value: response.total_data,
+            icon: 'layers',
+            key: 'total',
+          },
+          {
+            title: 'Done',
+            value: response.done_count,
+            icon: 'checkmark-done',
+            key: 'done',
+          },
+          {
+            title: 'Progress',
+            value: response.in_progress_count,
+            icon: 'time',
+            key: 'progress',
+          },
+          {
+            title: 'Tender',
+            value: response.in_tender_count,
+            icon: 'pricetag',
+            key: 'tender',
+          },
+          {
+            title: 'Rejected',
+            value: response.rejected_count,
+            icon: 'close-circle',
+            key: 'rejected',
+          },
         ];
+
+        this.setActiveStatus('total');
       },
-      error: (error) => {
-        console.error('Failed to fetch status count:', error);
-        this.statusCards = [];
+      error: (err) => {
+        console.error('Failed to fetch:', err);
       },
     });
+  }
+
+  setActiveStatus(status: string) {
+    this.activeStatus = status;
+
+    switch (status) {
+      case 'done':
+        this.filteredData = this.rawData.done_data || [];
+        break;
+      case 'progress':
+        this.filteredData = this.rawData.in_progress_data || [];
+        break;
+      case 'tender':
+        this.filteredData = this.rawData.in_tender_data || [];
+        break;
+      case 'rejected':
+        this.filteredData = this.rawData.rejected_data || [];
+        break;
+      case 'total':
+      default:
+        this.filteredData = [
+          ...(this.rawData.done_data || []),
+          ...(this.rawData.in_progress_data || []),
+          ...(this.rawData.in_tender_data || []),
+          ...(this.rawData.rejected_data || []),
+        ];
+        break;
+    }
+  }
+
+  onStatusCardClick(key: string) {
+    this.setActiveStatus(key);
   }
 
   openFilter() {
     this.router.navigate(['/notifications']);
     this.notificationService.markAsSeen();
     this.notificationCount = 0;
+  }
+
+  viewAllPending() {
+    this.router.navigate(['/pr-list'], {
+      queryParams: { filter: 'waiting_approval' },
+    });
   }
 }
