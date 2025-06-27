@@ -1,16 +1,12 @@
-<ion-content>
-  <div class="dashboard-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-content">
-        <div>
-          <p>Request Form</p>
-        </div>
-      </div>
-    </div>
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-title>Request Form</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true" scrollEvents="true" class="form-content">
+  <div class="form-wrapper">
     <form [formGroup]="orderForm" (ngSubmit)="submitForm()">
-      <!-- Form Details -->
       <h2 class="section-title">Form Details</h2>
       <div class="card">
         <div class="form-group">
@@ -44,12 +40,10 @@
           formControlName="due_date"
           presentation="date"
           (ionChange)="updateDueDate($event)"
-          class="smooth-picker"
           [min]="minDate()"
         ></ion-datetime>
       </div>
 
-      <!-- Items -->
       <h2 class="section-title">Items</h2>
       <div class="card">
         <div formArrayName="items">
@@ -63,34 +57,28 @@
             <div class="form-group">
               <label>Item Name</label>
               <input type="text" formControlName="item_name" />
-              <small class="helper-text">Contoh: Laptop Lenovo ThinkPad</small>
             </div>
 
             <div class="form-group">
               <label>Specification</label>
               <input type="text" formControlName="specification" />
-              <small class="helper-text">Contoh: RAM 16GB, SSD 512GB</small>
             </div>
 
             <div class="form-group">
               <label>Quantity</label>
               <input type="number" formControlName="quantity" />
-              <small class="helper-text">Jumlah unit yang dibutuhkan</small>
             </div>
 
             <div class="form-group">
               <label>Unit</label>
               <input type="text" formControlName="unit" />
-              <small class="helper-text">Contoh: pcs, box, pack</small>
             </div>
 
             <div class="form-group">
               <label>Unit Price</label>
               <input type="number" formControlName="unit_price" />
-              <small class="helper-text">Harga per unit dalam IDR</small>
             </div>
 
-            <!-- Tambahan: Upload File -->
             <div class="form-group">
               <label>Upload File</label>
               <input
@@ -98,7 +86,6 @@
                 (change)="onFileChange($event, i)"
                 accept=".pdf,.jpg,.jpeg,.png"
               />
-              <small class="helper-text">Maks. 5MB. Format: PDF/JPG/PNG</small>
             </div>
 
             <button type="button" (click)="removeItem(i)" class="danger-button">
@@ -112,7 +99,6 @@
         </button>
       </div>
 
-      <!-- Submit Button -->
       <button
         type="submit"
         [disabled]="orderForm.invalid || isSubmitting"
@@ -122,15 +108,14 @@
         Submit
       </button>
     </form>
-    <!-- Loading Indicator -->
+
     <ion-spinner
       *ngIf="isSubmitting"
       name="dots"
       class="loading-indicator"
     ></ion-spinner>
 
-    <!-- Modal Pop-up Custom -->
-    <!-- Modal Pop-up Custom -->
+    <!-- MODAL -->
     <div class="modal-backdrop" *ngIf="showModalPopup">
       <div class="modal-content">
         <ion-icon

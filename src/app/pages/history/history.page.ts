@@ -45,6 +45,7 @@ export class HistoryPage implements OnInit {
   getStatusClass(status: string): string {
     if (status === 'approved_manager') return 'status-approved';
     if (status === 'in_tender') return 'status-in-tender';
+    if (status === 'finish') return 'status-finished';
     return 'status-rejected';
   }
 

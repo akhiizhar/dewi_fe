@@ -1,0 +1,101 @@
+ion-content {
+  --background: #f8f9fa !important;
+  min-height: 100vh;
+}
+
+ion-toolbar.header {
+  background-color: #3f51b5 !important;
+  --background: #3f51b5 !important;
+  --color: #ffffff !important;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+
+ion-card {
+  margin: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+ion-card-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+ion-card-subtitle {
+  font-size: 14px;
+  color: #888;
+}
+
+ion-card-content p {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+  position: relative;
+  padding: 0 4px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  color: #ccc;
+}
+
+.step-label {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.step.active {
+  color: green;
+}
+
+.step ion-icon {
+  font-size: 24px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  padding: 6px;
+  margin-bottom: 4px;
+}
+
+.step.active ion-icon {
+  background: green;
+  color: white;
+}
+
+.line {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 100%;
+  height: 3px;
+  background-color: #ccc;
+  z-index: -1;
+}
+
+.step.active ~ .line {
+  background-color: green;
+}

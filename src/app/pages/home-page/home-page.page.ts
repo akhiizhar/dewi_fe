@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-page',
@@ -15,6 +17,8 @@ export class HomePagePage implements OnInit {
   todayDate: string = '';
   notificationCount = 0;
   apiUrl = environment.apiUrl;
+  searchTerm: string = '';
+  searchSubject = new Subject<string>();
 
   statusCards: { title: string; value: number; icon: string; key: string }[] =
     [];
@@ -22,10 +26,14 @@ export class HomePagePage implements OnInit {
   filteredData: any[] = [];
   rawData: any = {};
 
+  loading: HTMLIonLoadingElement | null = null;
+
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastController: ToastController,
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
@@ -52,11 +60,23 @@ export class HomePagePage implements OnInit {
     });
 
     this.fetchStatusCount();
+
+    this.searchSubject
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((term) => {
+        if (term.length >= 5) {
+          this.filterLocal(term);
+        } else {
+          this.setActiveStatus(this.activeStatus); // Gunakan status terakhir
+        }
+      });
   }
 
-  fetchStatusCount() {
+  async fetchStatusCount() {
+    await this.presentLoading();
+
     this.http.get<any>(`${this.apiUrl}/status_count`).subscribe({
-      next: (response) => {
+      next: async (response) => {
         this.rawData = response;
 
         this.statusCards = [
@@ -92,12 +112,36 @@ export class HomePagePage implements OnInit {
           },
         ];
 
-        this.setActiveStatus('total');
+        this.setActiveStatus(this.activeStatus);
+        await this.dismissLoading();
       },
-      error: (err) => {
+      error: async (err) => {
         console.error('Failed to fetch:', err);
+        await this.dismissLoading();
       },
     });
+  }
+
+  onSearchInput(event: any) {
+    const value = event.detail.value.trim().toLowerCase();
+    this.searchTerm = value;
+    this.searchSubject.next(value);
+  }
+
+  filterLocal(term: string) {
+    const allData = [
+      ...(this.rawData.done_data || []),
+      ...(this.rawData.in_progress_data || []),
+      ...(this.rawData.in_tender_data || []),
+      ...(this.rawData.rejected_data || []),
+    ];
+
+    this.filteredData = allData.filter(
+      (item) =>
+        item.title?.toLowerCase().includes(term) ||
+        item.no_reg?.toLowerCase().includes(term) ||
+        item.status?.toLowerCase().includes(term)
+    );
   }
 
   setActiveStatus(status: string) {
@@ -128,6 +172,22 @@ export class HomePagePage implements OnInit {
     }
   }
 
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'approved_manager':
+        return 'status-approved';
+      case 'rejected_manager':
+      case 'rejected_purchasing':
+        return 'status-rejected';
+      case 'in_tender':
+        return 'status-in-tender';
+      case 'finish':
+        return 'status-finished';
+      default:
+        return '';
+    }
+  }
+
   onStatusCardClick(key: string) {
     this.setActiveStatus(key);
   }
@@ -141,6 +201,52 @@ export class HomePagePage implements OnInit {
   viewAllPending() {
     this.router.navigate(['/pr-list'], {
       queryParams: { filter: 'waiting_approval' },
+    });
+  }
+
+  async handleRefresh(event: any) {
+    await this.notificationService.fetchNotifications().toPromise();
+    this.notificationService.resetSeenStatusIfNewNotifications();
+    this.notificationCount = this.notificationService.getNotificationCount();
+
+    await this.fetchStatusCount(); // fetchStatusCount() sudah punya loading
+
+    setTimeout(() => {
+      event.target.complete();
+      this.presentToast();
+    }, 500);
+  }
+
+  // === Loading ===
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      message: 'Memuat data...',
+      spinner: 'crescent',
+      translucent: true,
+      backdropDismiss: false,
+    });
+    await this.loading.present();
+  }
+
+  async dismissLoading() {
+    if (this.loading) {
+      await this.loading.dismiss();
+      this.loading = null;
+    }
+  }
+
+  // === Toast ===
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Data berhasil diperbarui',
+      duration: 2000,
+      color: 'success',
+    });
+    await toast.present();
+  }
+  onCardClick(item: any) {
+    this.router.navigate(['/detail-home'], {
+      state: { data: item },
     });
   }
 }

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <div class="header-row" (click)="goBack()">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+      <ion-title>Detail PR</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [scrollEvents]="true" keyboard-attach>
+  <ion-card *ngIf="item" class="detail-card">
+    <ion-card-header>
+      <ion-card-title>{{ item.title }}</ion-card-title>
+      <ion-card-subtitle>No. Reg: {{ item.no_reg }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Progress Status -->
+      <div class="progress-container">
+        <div
+          *ngFor="let step of steps; let i = index"
+          class="step"
+          [class.active]="i <= activeStep"
+        >
+          <div class="step-line" *ngIf="i !== 0"></div>
+          <div class="step-icon">
+            <ion-icon [name]="step.icon"></ion-icon>
+          </div>
+          <div class="step-label">{{ step.label }}</div>
+        </div>
+      </div>
+
+      <!-- Detail Data -->
+      <p><strong>Status:</strong> {{ item.status }}</p>
+      <p>
+        <strong>Total Amount:</strong> Rp. {{ item.total_amount | number:'1.0-0'
+        }}
+      </p>
+      <p><strong>Due Date:</strong> {{ item.due_date | date:'dd MMM yyyy' }}</p>
+      <p><strong>Deskripsi:</strong> {{ item.description || '-' }}</p>
+      <p><strong>Approval Note:</strong> {{ item.approver_note || '-' }}</p>
+      <p><strong>Approval Date:</strong> {{ item.approver_date || '-' }}</p>
+      <p><strong>Admin Note:</strong> {{ item.admin_note || '-' }}</p>
+      <p><strong>Admin Date:</strong> {{ item.admin_date || '-' }}</p>
+      <p>
+        <strong>Created At:</strong> {{ item.created_at | date:'dd MMM yyyy
+        HH:mm' }}
+      </p>
+      <p>
+        <strong>Updated At:</strong> {{ item.updated_at | date:'dd MMM yyyy
+        HH:mm' }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

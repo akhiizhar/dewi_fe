@@ -32,7 +32,11 @@ const routes: Routes = [
   {
     path: 'approval-detail',
     loadChildren: () => import('./pages/approval-detail/approval-detail.module').then( m => m.ApprovalDetailPageModule)
+  },  {
+    path: 'detail-home',
+    loadChildren: () => import('./pages/detail-home/detail-home.module').then( m => m.DetailHomePageModule)
   },
+
 ];
 
 @NgModule({

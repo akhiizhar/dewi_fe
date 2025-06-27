@@ -14,6 +14,15 @@
 </ion-header>
 
 <ion-content class="dashboard-container" fullscreen>
+  <!-- ✅ Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingText="Tarik untuk menyegarkan"
+      refreshingSpinner="crescent"
+      refreshingText="Memuat..."
+    ></ion-refresher-content>
+  </ion-refresher>
+
   <div class="main-content">
     <!-- Scroll Cards -->
     <div class="scroll-cards">
@@ -39,32 +48,58 @@
     <ion-searchbar
       placeholder="Search"
       class="custom-searchbar"
+      (ionInput)="onSearchInput($event)"
     ></ion-searchbar>
 
-    <!-- Filtered List -->
+    <!-- Section Header -->
     <div class="section-header" *ngIf="filteredData.length >= 0">
       <h2>{{ activeStatus | titlecase }}</h2>
-      <a (click)="viewAllPending()">View All</a>
     </div>
 
+    <!-- Approval List -->
     <div class="approval-list">
-      <ion-card class="approval-item" *ngFor="let item of filteredData">
+      <ion-card
+        class="approval-item"
+        *ngFor="let item of filteredData"
+        (click)="onCardClick(item)"
+      >
+        <div
+          class="status-strip"
+          [ngClass]="'status-strip ' + getStatusClass(item.status)"
+        ></div>
+
         <ion-card-content>
           <div class="approval-info">
-            <div>
-              <h3>{{ item.title }}</h3>
-              <p>
-                {{ item.no_reg }} • Rp{{ item.total_amount | number: '1.0-0' }}
-              </p>
+            <div class="status-line">
+              <span
+                class="status-label"
+                [ngClass]="'status-label ' + getStatusClass(item.status)"
+              >
+                {{ item.status === 'approved_manager' ? 'Approved by Manager' :
+                item.status === 'rejected_manager' ? 'Rejected by Manager' :
+                item.status === 'rejected_purchasing' ? 'Rejected by Purchasing'
+                : item.status === 'in_tender' || item.status ===
+                'waiting_approval' ? 'In Tender' : item.status === 'finish' ?
+                'Finished' : item.status }}
+              </span>
+              <span class="no-reg">{{ item.no_reg }}</span>
             </div>
-            <span>{{ item.due_date | date: 'dd MMM yyyy' }}</span>
+
+            <h3>{{ item.title }}</h3>
+
+            <div class="amount-date">
+              <p>Rp. {{ item.total_amount | number: '1.0-0' }}</p>
+              <span>{{ item.due_date | date: 'dd MMM yyyy' }}</span>
+            </div>
           </div>
         </ion-card-content>
       </ion-card>
     </div>
 
+    <!-- Empty State -->
     <div *ngIf="filteredData.length === 0" class="empty-state">
-      <p>Belum ada data untuk status ini.</p>
+      <ion-icon name="file-tray" size="large"></ion-icon>
+      <p>No data</p>
     </div>
   </div>
 </ion-content>
