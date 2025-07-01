@@ -9,6 +9,21 @@ body.keyboard-is-open ion-content.form-content {
   padding-bottom: 300px !important;
 }
 
+ion-datetime {
+  --background: #ffffff !important;
+  --color: #000000 !important;
+  --ion-background-color: #ffffff !important;
+  --ion-color-step-50: #ffffff !important;
+  --ion-color-step-100: #ffffff !important;
+  --ion-item-background: #ffffff !important;
+  --ion-text-color: #000000 !important;
+  --ion-text-color-rgb: 0, 0, 0 !important;
+}
+
+ion-modal {
+  --background: #ffffff !important;
+}
+
 ion-toolbar.header {
   background-color: #3f51b5 !important;
   --background: #3f51b5 !important;

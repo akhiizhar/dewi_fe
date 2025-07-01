@@ -23,7 +23,8 @@
     ></ion-refresher-content>
   </ion-refresher>
 
-  <div class="main-content">
+  <!-- ✅ Sticky Scroll Cards + Search Bar -->
+  <div class="sticky-header">
     <!-- Scroll Cards -->
     <div class="scroll-cards">
       <div
@@ -50,13 +51,14 @@
       class="custom-searchbar"
       (ionInput)="onSearchInput($event)"
     ></ion-searchbar>
+  </div>
 
-    <!-- Section Header -->
+  <!-- ✅ Approval List -->
+  <div class="main-content">
     <div class="section-header" *ngIf="filteredData.length >= 0">
       <h2>{{ activeStatus | titlecase }}</h2>
     </div>
 
-    <!-- Approval List -->
     <div class="approval-list">
       <ion-card
         class="approval-item"
@@ -73,20 +75,24 @@
             <div class="status-line">
               <span
                 class="status-label"
-                [ngClass]="'status-label ' + getStatusClass(item.status)"
+                [ngClass]="{
+                  'status-label': true,
+                  'status-approved': item.status === 'approved_manager' || item.status === 'finish',
+                  'status-rejected': item.status === 'rejected_manager' || item.status === 'rejected_purchasing',
+                  'status-in-tender': item.status === 'in_tender' || item.status === 'waiting_approval',
+                  'status-finished': item.status === 'finish'
+                }"
               >
                 {{ item.status === 'approved_manager' ? 'Approved by Manager' :
                 item.status === 'rejected_manager' ? 'Rejected by Manager' :
                 item.status === 'rejected_purchasing' ? 'Rejected by Purchasing'
-                : item.status === 'in_tender' || item.status ===
-                'waiting_approval' ? 'In Tender' : item.status === 'finish' ?
-                'Finished' : item.status }}
+                : item.status === 'in_tender' ? 'In Tender' : item.status ===
+                'waiting_approval' ? 'Waiting Approval' : item.status ===
+                'finish' ? 'Finished' : item.status }}
               </span>
               <span class="no-reg">{{ item.no_reg }}</span>
             </div>
-
             <h3>{{ item.title }}</h3>
-
             <div class="amount-date">
               <p>Rp. {{ item.total_amount | number: '1.0-0' }}</p>
               <span>{{ item.due_date | date: 'dd MMM yyyy' }}</span>

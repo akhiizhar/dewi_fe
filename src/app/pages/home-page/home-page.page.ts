@@ -181,6 +181,8 @@ export class HomePagePage implements OnInit {
         return 'status-rejected';
       case 'in_tender':
         return 'status-in-tender';
+      case 'waiting_approval':
+        return 'status-waiting';
       case 'finish':
         return 'status-finished';
       default:

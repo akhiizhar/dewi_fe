@@ -59,4 +59,8 @@ export class NotificationService {
       this.hasSeenNotifications = false; // Reset status jika ada notifikasi baru
     }
   }
+
+  saveNotifications(notifs: any[]): void {
+    localStorage.setItem('notifications', JSON.stringify(notifs));
+  }
 }

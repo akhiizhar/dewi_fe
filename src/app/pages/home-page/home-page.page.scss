@@ -11,7 +11,7 @@ ion-header.header {
   padding: 16px;
   padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
   border-radius: 0 0 24px 24px;
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
 }
 
 .header-content {
@@ -72,6 +72,7 @@ ion-header.header {
 
 .main-content {
   padding: 0 4px 6px;
+  margin-top: 20px;
 }
 
 .scroll-cards {
@@ -80,8 +81,10 @@ ion-header.header {
   gap: 12px;
   padding-top: 16px;
   padding-bottom: 16px;
-  padding-left: 10px;
+  padding-left: 24px; // Tambah padding kiri agar tidak mepet
+  padding-right: 24px; // Tambah padding kanan agar tidak mepet
   margin-bottom: 24px;
+  margin-right: 0; // Hilangkan margin kanan agar lebih rata
   scroll-snap-type: x mandatory;
 
   .scroll-card.active ion-card {
@@ -292,6 +295,10 @@ ion-header.header {
         font-weight: 600;
         color: #333;
         margin: 0;
+        max-width: 20ch;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .amount {
@@ -365,6 +372,13 @@ ion-header.header {
   background-color: #e46f00;
 }
 
+.status-label.status-waiting {
+  color: #e46f00;
+}
+.status-strip.status-waiting {
+  background-color: #e46f00;
+}
+
 .status-label.status-finished {
   color: #3f51b5;
 }
@@ -407,4 +421,14 @@ h3 {
   font-size: 15px;
   font-weight: 600;
   color: #333;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  margin-top: -16px; // ✅ tarik ke atas agar nutup header
+  background-color: #ffffff;
+  z-index: 9;
+  // padding-top: 8px;
+  padding-bottom: 8px;
 }

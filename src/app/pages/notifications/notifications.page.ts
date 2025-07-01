@@ -9,19 +9,41 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class NotificationsPage implements OnInit {
   notifications: any[] = [];
+
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
-    // Tampilkan data dari localStorage dulu
-    this.notifications = this.notificationService.getNotifications();
+    const oldNotifications = this.notificationService.getNotifications();
 
-    // Lalu ambil fresh dari API
-    this.notificationService.fetchNotifications().subscribe(() => {
-      this.notifications = this.notificationService.getNotifications();
-    });
+    this.notificationService
+      .fetchNotifications()
+      .subscribe((freshNotifications: any[]) => {
+        const updatedNotifications = freshNotifications.map((newNotif) => {
+          const oldNotif = oldNotifications.find((o) => o.id === newNotif.id);
+
+          if (!oldNotif) {
+            return { ...newNotif, isNew: true };
+          }
+
+          if (oldNotif.status !== newNotif.status) {
+            return { ...newNotif, isNew: true };
+          }
+
+          return { ...newNotif, isNew: false };
+        });
+
+        this.notifications = updatedNotifications;
+        this.notificationService.saveNotifications(updatedNotifications);
+      });
+
+    this.notifications = oldNotifications;
   }
 
   goBack() {
     window.history.back();
+  }
+
+  get newCount(): number {
+    return this.notifications.filter((n) => n.isNew).length;
   }
 }

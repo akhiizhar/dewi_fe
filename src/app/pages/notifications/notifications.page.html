@@ -1,3 +1,4 @@
+<!-- notifications.page.html -->
 <ion-header class="custom-ion-header">
   <ion-toolbar class="custom-toolbar">
     <ion-buttons slot="start">
@@ -11,7 +12,11 @@
 
 <ion-content class="ion-no-padding">
   <div class="notifications-list">
-    <div class="notification-item" *ngFor="let notification of notifications">
+    <div
+      class="notification-item"
+      *ngFor="let notification of notifications"
+      [class.new]="notification.isNew"
+    >
       <div class="notification-grid">
         <!-- Grid 1: Icon -->
         <div class="icon-area">
@@ -21,7 +26,7 @@
         <!-- Grid 2: Title, Description, User -->
         <div class="content-area">
           <div class="title-date-group">
-            <h3>{{ notification.title }}</h3>
+            <h3 class="notification-title">{{ notification.title}}</h3>
           </div>
           <p class="notification-description">{{ notification.description }}</p>
           <div class="user-message-group">
@@ -29,12 +34,11 @@
           </div>
         </div>
 
-        <!-- Grid 3: Date, Message -->
+        <!-- Grid 3: Date & Label -->
         <div class="side-area">
           <span class="notification-date">
             {{ notification.due_date | date: 'dd-MMM-yyyy' }}
           </span>
-          <span></span>
           <span class="approval-label" *ngIf="notification.message">
             {{ notification.message }}
           </span>
