@@ -31,25 +31,53 @@
       </div>
 
       <!-- Detail Data -->
-      <p><strong>Status:</strong> {{ item.status }}</p>
-      <p>
-        <strong>Total Amount:</strong> Rp. {{ item.total_amount | number:'1.0-0'
-        }}
-      </p>
-      <p><strong>Due Date:</strong> {{ item.due_date | date:'dd MMM yyyy' }}</p>
-      <p><strong>Deskripsi:</strong> {{ item.description || '-' }}</p>
-      <p><strong>Approval Note:</strong> {{ item.approver_note || '-' }}</p>
-      <p><strong>Approval Date:</strong> {{ item.approver_date || '-' }}</p>
-      <p><strong>Admin Note:</strong> {{ item.admin_note || '-' }}</p>
-      <p><strong>Admin Date:</strong> {{ item.admin_date || '-' }}</p>
-      <p>
-        <strong>Created At:</strong> {{ item.created_at | date:'dd MMM yyyy
-        HH:mm' }}
-      </p>
-      <p>
-        <strong>Updated At:</strong> {{ item.updated_at | date:'dd MMM yyyy
-        HH:mm' }}
-      </p>
+      <div class="field-row">
+        <span class="label">Status</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.status }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Total Amount</span>
+        <span class="colon">:</span>
+        <span class="value">Rp. {{ item.total_amount | number: '1.0-0' }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Due Date</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.due_date | date: 'dd MMM yyyy' }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Deskripsi</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.description || '-' }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Approval Note</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.approver_note || '-' }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Approval Date</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.approver_date || '-' }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Admin Note</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.admin_note || '-' }}</span>
+      </div>
+
+      <div class="field-row">
+        <span class="label">Admin Date</span>
+        <span class="colon">:</span>
+        <span class="value">{{ item.admin_date || '-' }}</span>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

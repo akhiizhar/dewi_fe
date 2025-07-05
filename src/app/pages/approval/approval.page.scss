@@ -1,6 +1,12 @@
-ion-content {
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ion-content.scrollable-content {
   --background: #f8f9fa !important;
-  min-height: 100vh;
+  height: 100%;
 }
 
 ion-toolbar.header {
@@ -25,11 +31,9 @@ ion-title {
   max-width: 500px;
   margin: 0 auto;
   background-color: transparent;
-  min-height: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
 .notifications-list {
@@ -38,6 +42,7 @@ ion-title {
   gap: 16px;
   padding: 16px;
   flex-grow: 1;
+  overflow-y: auto; /* ✅ agar bisa di-scroll */
 }
 
 /* Loading Spinner */
